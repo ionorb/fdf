@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/12 23:14:36 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/12 23:40:14 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int ac, char **av)
 	int		i;
 
 	i = 0;
-	if (ac != 7)
+	if (ac != 9)
 		return (0);
 	pts = malloc (4 * sizeof(float));
 	data = malloc(sizeof(t_data));
@@ -71,6 +71,8 @@ int	main(int ac, char **av)
 	while (++i < 5)
 		pts[i - 1] = (float)ft_atoi(av[i + 1]);
 	data->zoom = ft_atoi(av[i + 1]);
+	data->x_offset = ft_atoi(av[i + 2]);
+	data->y_offset = ft_atoi(av[i + 3]);
 	i = -1;
 //	while (++i < 4)
 //		printf("pts[%d]:%f\n", i, pts[i]);
@@ -79,7 +81,7 @@ int	main(int ac, char **av)
 //	draw_line(pts, data);
 	draw(data);
 //	mlx_key_hook(data->win, deal_key, NULL);
-//	mlx_loop(data->mlx);
+	mlx_loop(data->mlx);
 	ft_display(data);
 	ft_freedata(data);
 	return (0);
