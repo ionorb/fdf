@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/12 23:39:51 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/13 01:06:55 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
 # include "minilibx/mlx.h"
 
 typedef struct s_data
@@ -29,6 +30,10 @@ typedef struct s_data
 	int		zoom;
 	int		x_offset;
 	int		y_offset;
+	int		z_scale;
+	int		x_angle;
+	int		y_angle;
+	int		run;
 }	t_data;
 
 char	*get_next_line(int fd);
@@ -40,4 +45,5 @@ char	*ft_strjoin(char *s1, char *s2);
 //void	draw_line(int x0, int y0, int x1, int y1, t_data *data);
 void	draw_line(float *pts, t_data *data);
 void	draw(t_data *data);
+void	ft_putnbr_fd(int n, int fd);
 #endif

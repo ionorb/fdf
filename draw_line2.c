@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/12 23:39:38 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/13 00:40:00 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,36 @@ float	*arr_cpy(float *arr, int size, int zoom)
 	return (cpy);
 }
 
+void	make3d(float *x, float *y, float z, t_data *data)
+{
+	float	scale;
+	float	x_angle;
+	float	y_angle;
+
+	x_angle = data->x_angle;
+	y_angle = data->y_angle;
+	scale = data->z_scale;
+	scale /= 10;
+	x_angle /= 10;
+	y_angle /= 10;
+	*x = (*x - *y) * cos(x_angle);
+	*y = (*x + *y) * sin(y_angle) - (z * scale);
+}
+
 void	draw_line(float *pts, t_data *data)
 {
 	float	xstep;
 	float	ystep;
+	float	z0;
+	float	z1;
 	float	*ptz;
 	int		max;
 
-	max = -1;
+//	printf("pts[1]:%f pts[0]:%f, pts[3]:%f, pts[2]:%f\n", pts[1], pts[0], pts[3], pts[2]);
+	z0 = data->matrix[(int)(pts[1] - data->y_offset)][(int)(pts[0] - data->x_offset)];
+	z1 = data->matrix[(int)(pts[3] - data->y_offset)][(int)(pts[2] - data->x_offset)];
+	make3d(&pts[0], &pts[1], z0, data);
+	make3d(&pts[2], &pts[3], z1, data);
 	ptz = arr_cpy(pts, 4, data->zoom);
 	xstep = ptz[2] - ptz[0];
 	ystep = ptz[3] - ptz[1];
@@ -85,15 +107,14 @@ void	draw(t_data *data)
 	while (y < data->height + data->y_offset)
 	{
 		x = data->x_offset;
-		while (x < data->width - 1 + data->x_offset)
+		while (x < data->width + data->x_offset)
 		{
-			draw_line(make_pts(x, y, x + 1, y), data);
-			if (y != data->height - 1 + data->y_offset)
+			if (x < data->width - 1 + data->x_offset)
+				draw_line(make_pts(x, y, x + 1, y), data);
+			if (y < data->height - 1 + data->y_offset)
 				draw_line(make_pts(x, y, x, y + 1), data);
 			x += 1;
 		}
-		if (y < data->height - 1 + data->y_offset)
-			draw_line(make_pts(x, y, x, y + 1), data);
 		y += 1;
 	}
 }

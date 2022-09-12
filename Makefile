@@ -3,7 +3,7 @@ NAME		= 	fdf.a
 SRCS		= 	ft_atoi.c ft_split.c main.c read_file.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
-				draw_line2.c
+				draw_line2.c putnum.c
 
 OBJS		= 	$(SRCS:.c=.o)
 

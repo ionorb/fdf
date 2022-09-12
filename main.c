@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/12 23:40:14 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/13 01:15:44 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,37 +50,56 @@ void	ft_freedata(t_data *data)
 	free(data);
 }
 
-/*int	key_press(int key, void *data)
+int	key_press(int key) //t_data *data)
 {
-	printf("%d", key);
+	ft_putnbr_fd(key, 1);
+	write(1, "\n", 1);
+/*	if (key == 126)
+		data->y_offset--;
+	if (key == 125)
+		data->y_offset++;
+	if (key == 123)
+		data->x_offset--;
+	if (key == 124)
+		data->x_offset++;
+	if (key == 13)
+		data->x_angle++;
+	if (key == 1)
+		data->x_angle--;
+	if (key == 0)
+		data->y_angle++;
+	if (key == 2)
+		data->y_angle--;
+	if (key == 53)
+		data->run = 0;
+	if (key == 43)
+		data->z_scale--;
+	if (key == 47)
+		data->z_scale++;
+	mlx_clear_window(data->mlx, data->win);
+	draw(data);*/
 	return (0);
-}*/
+}
 
 int	main(int ac, char **av)
 {
 	t_data	*data;
-	float	*pts;
-	int		i;
 
-	i = 0;
-	if (ac != 9)
+	if (ac != 8)
 		return (0);
-	pts = malloc (4 * sizeof(float));
 	data = malloc(sizeof(t_data));
 	read_file(av[1], data);
-	while (++i < 5)
-		pts[i - 1] = (float)ft_atoi(av[i + 1]);
-	data->zoom = ft_atoi(av[i + 1]);
-	data->x_offset = ft_atoi(av[i + 2]);
-	data->y_offset = ft_atoi(av[i + 3]);
-	i = -1;
-//	while (++i < 4)
-//		printf("pts[%d]:%f\n", i, pts[i]);
+	data->run = 1;
+	data->zoom = ft_atoi(av[2]);
+	data->x_offset = ft_atoi(av[3]);
+	data->y_offset = ft_atoi(av[4]);
+	data->z_scale = ft_atoi(av[5]);
+	data->x_angle = ft_atoi(av[6]);
+	data->y_angle = ft_atoi(av[7]);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 800, 800, "urmom");
-//	draw_line(pts, data);
 	draw(data);
-//	mlx_key_hook(data->win, deal_key, NULL);
+	mlx_expose_hook(data->win, key_press, data);
 	mlx_loop(data->mlx);
 	ft_display(data);
 	ft_freedata(data);
