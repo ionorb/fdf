@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/11 18:47:19 by myaccount        ###   ########.fr       */
+/*   Updated: 2022/09/12 02:26:22 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,20 @@ void	ft_freedata(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	*data;
+	float	flo;
 
+	flo = 4.5;
+	flo /= 2;
+	printf("float:%f\n", flo);
 	if (ac > 2)
 		return (0);
 	data = malloc(sizeof(t_data));
 	read_file(av[1], data);
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, 1000, 750, "urmom");
+	draw_line(0, 0, 1000, 750, data);
+	//mlx_key_hook(data->win, deal_key, NULL);
+	mlx_loop(data->mlx);
 	ft_display(data);
 	ft_freedata(data);
 	return (0);

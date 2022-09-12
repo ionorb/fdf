@@ -3,13 +3,14 @@ NAME		= 	fdf.a
 SRCS		= 	ft_atoi.c ft_split.c main.c read_file.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
-				minilibx/libmlx.a
+				draw_line2.c
 
 OBJS		= 	$(SRCS:.c=.o)
 
 CC			= 	gcc
 
-CCFLAGS 	= 	-Wall -Wextra -Werror -D BUFFER_SIZE=100 
+CCFLAGS 	= 	-Wall -Wextra -Werror -D BUFFER_SIZE=100
+
 .c.o:
 			$(CC) $(CCFLAGS) -c $< -o $(<:.c=.o)
 
@@ -19,7 +20,7 @@ $(NAME):	$(OBJS)
 all:		$(NAME)
 
 compile:	$(NAME)
-			gcc $(NAME) -o fdf
+			gcc $(NAME) -o fdf libmlx.dylib -framework OpenGL -framework AppKit
 
 clean:
 			rm -f $(OBJS) $(BONUS_OBJS)
