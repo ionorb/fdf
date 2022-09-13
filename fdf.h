@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/13 01:06:55 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/13 19:18:33 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,17 @@ typedef struct s_data
 	int		**matrix;
 	void	*mlx;
 	void	*win;
+	void	*img;
 	int		zoom;
 	int		x_offset;
 	int		y_offset;
 	int		z_scale;
 	int		x_angle;
 	int		y_angle;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	char	*addr;
 	int		run;
 }	t_data;
 
