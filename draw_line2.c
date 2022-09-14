@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/13 00:40:00 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/14 02:33:35 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	draw_line(float *pts, t_data *data)
 	float	z1;
 	float	*ptz;
 	int		max;
+	long long	i;
 
-//	printf("pts[1]:%f pts[0]:%f, pts[3]:%f, pts[2]:%f\n", pts[1], pts[0], pts[3], pts[2]);
 	z0 = data->matrix[(int)(pts[1] - data->y_offset)][(int)(pts[0] - data->x_offset)];
 	z1 = data->matrix[(int)(pts[3] - data->y_offset)][(int)(pts[2] - data->x_offset)];
 	make3d(&pts[0], &pts[1], z0, data);
@@ -78,10 +78,22 @@ void	draw_line(float *pts, t_data *data)
 	ystep /= max;
 	while ((int)(ptz[0] - ptz[2]) || (int)(ptz[1] - ptz[3]))
 	{
-		mlx_pixel_put(data->mlx, data->win, ptz[0], ptz[1], 0xffffff);
+		i = ((ptz[0] * (data->bits_per_pixel / 8)) + (ptz[1] * data->size_line));
+	//	mlx_pixel_put(data->mlx, data->win, ptz[0], ptz[1], 255);
+		ft_putnbr_fd(i, 1);
+		printf("ptz[0]:%f, ptz[1]:%f\n", ptz[0], ptz[1]);
+		if (ptz[0] >= 0 && ptz[0] < 800 * (data->bits_per_pixel / 8) && ptz[1] >= 0 && ptz[1] <= 800 )
+		{
+			write(1, "woo\n", 4);
+			data->addr[i] = mlx_get_color_value(data->mlx, 255);
+			data->addr[i + 1] = mlx_get_color_value(data->mlx, 255);
+			data->addr[i + 2] = mlx_get_color_value(data->mlx, 255) >> 8;
+			data->addr[i + 3] = mlx_get_color_value(data->mlx, 255) >> 16;
+		}
 		ptz[0] += xstep;
 		ptz[1] += ystep;
 	}
+	write(1, "boo\n", 4);
 	free(ptz);
 	free(pts);
 }
@@ -103,6 +115,7 @@ void	draw(t_data *data)
 	int		y;
 	int		x;
 
+	ft_bzero(data->addr, 800 * 800 * (data->bits_per_pixel / 8));
 	y = data->y_offset;
 	while (y < data->height + data->y_offset)
 	{
@@ -117,4 +130,5 @@ void	draw(t_data *data)
 		}
 		y += 1;
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }

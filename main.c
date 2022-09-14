@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/13 20:05:57 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/14 02:29:08 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ int	key_press(int key, t_data *data)
 		data->zoom++;
 	if (key == 27)
 		data->zoom--;
-	mlx_clear_window(data->mlx, data->win);
+//	mlx_clear_window(data->mlx, data->win);
+//	mlx_destroy_image(data->mlx, data->img);
+//	free(data->img);
+//	data->img = mlx_new_image(data->mlx, 800, 800);
 	draw(data);
 	return (0);
 }
@@ -88,9 +91,9 @@ int	key_press(int key, t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	*data;
-	int		i;
+//	int		i;
 
-	i = 0;
+//	i = 0;
 	if (ac != 8)
 		return (0);
 	data = malloc(sizeof(t_data));
@@ -106,10 +109,19 @@ int	main(int ac, char **av)
 	data->win = mlx_new_window(data->mlx, 800, 800, "urmom");
 	data->img = mlx_new_image(data->mlx, 800, 800);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel), &(data->size_line), &(data->endian));
-	while (i++ < 100)
-		data->addr[i] = 1;
-//	draw(data);
-//	mlx_key_hook(data->win, key_press, data);
+/*	while (i < 800 * 4 * 800)
+	{	
+		data->addr[i] = mlx_get_color_value(data->mlx, 255);
+		data->addr[i + 1] = mlx_get_color_value(data->mlx, 255);
+		data->addr[i + 2] = mlx_get_color_value(data->mlx, 255);
+		i += 4;
+	}*/
+	ft_putnbr_fd(data->endian, 1);
+	write(1, "\n", 1);
+	ft_putnbr_fd(data->bits_per_pixel / 8, 1);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	draw(data);
+	mlx_key_hook(data->win, key_press, data);
 	mlx_loop(data->mlx);
 	ft_display(data);
 	ft_freedata(data);

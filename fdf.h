@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/13 19:18:33 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/14 02:16:58 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ char	*ft_strjoin(char *s1, char *s2);
 void	draw_line(float *pts, t_data *data);
 void	draw(t_data *data);
 void	ft_putnbr_fd(int n, int fd);
+void	ft_bzero(void *s, size_t n);
 #endif
