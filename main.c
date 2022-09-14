@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/14 02:29:08 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/14 02:55:16 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	ft_freedata(t_data *data)
 		free(data->matrix[i]);
 		i++;
 	}
+	free(data->mlx);
+	free(data->win);
+	free(data->img);
+	free(data->addr);
 	free(data->matrix);
 	free(data);
 }
@@ -80,10 +84,11 @@ int	key_press(int key, t_data *data)
 		data->zoom++;
 	if (key == 27)
 		data->zoom--;
-//	mlx_clear_window(data->mlx, data->win);
-//	mlx_destroy_image(data->mlx, data->img);
-//	free(data->img);
-//	data->img = mlx_new_image(data->mlx, 800, 800);
+	mlx_clear_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img);
+	free(data->img);
+	data->img = mlx_new_image(data->mlx, 800, 800);
+	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel), &(data->size_line), &(data->endian));
 	draw(data);
 	return (0);
 }
@@ -119,7 +124,7 @@ int	main(int ac, char **av)
 	ft_putnbr_fd(data->endian, 1);
 	write(1, "\n", 1);
 	ft_putnbr_fd(data->bits_per_pixel / 8, 1);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+//	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	draw(data);
 	mlx_key_hook(data->win, key_press, data);
 	mlx_loop(data->mlx);

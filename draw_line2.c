@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/14 02:33:35 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/14 02:57:03 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	draw_line(float *pts, t_data *data)
 	make3d(&pts[0], &pts[1], z0, data);
 	make3d(&pts[2], &pts[3], z1, data);
 	ptz = arr_cpy(pts, 4, data->zoom);
+	free(pts);
 	xstep = ptz[2] - ptz[0];
 	ystep = ptz[3] - ptz[1];
 	if (ft_abs(xstep) >= ft_abs(ystep))
@@ -79,23 +80,22 @@ void	draw_line(float *pts, t_data *data)
 	while ((int)(ptz[0] - ptz[2]) || (int)(ptz[1] - ptz[3]))
 	{
 		i = ((ptz[0] * (data->bits_per_pixel / 8)) + (ptz[1] * data->size_line));
-	//	mlx_pixel_put(data->mlx, data->win, ptz[0], ptz[1], 255);
 		ft_putnbr_fd(i, 1);
 		printf("ptz[0]:%f, ptz[1]:%f\n", ptz[0], ptz[1]);
 		if (ptz[0] >= 0 && ptz[0] < 800 * (data->bits_per_pixel / 8) && ptz[1] >= 0 && ptz[1] <= 800 )
 		{
+			mlx_pixel_put(data->mlx, data->win, ptz[0], ptz[1], 255);
 			write(1, "woo\n", 4);
 			data->addr[i] = mlx_get_color_value(data->mlx, 255);
 			data->addr[i + 1] = mlx_get_color_value(data->mlx, 255);
-			data->addr[i + 2] = mlx_get_color_value(data->mlx, 255) >> 8;
-			data->addr[i + 3] = mlx_get_color_value(data->mlx, 255) >> 16;
+			data->addr[i + 2] = mlx_get_color_value(data->mlx, 255);
+			data->addr[i + 3] = mlx_get_color_value(data->mlx, 255);
 		}
 		ptz[0] += xstep;
 		ptz[1] += ystep;
+		write(1, "boo\n", 4);
 	}
-	write(1, "boo\n", 4);
 	free(ptz);
-	free(pts);
 }
 
 float	*make_pts(float x0, float y0, float x1, float y1)
