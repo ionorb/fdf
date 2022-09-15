@@ -4,7 +4,7 @@ LIBFT			=	$(LIBFT_PATH)/libft.a
 MLX_LINUX_PATH	=	./libs/mlx-linux
 MLX_LINUX		=	$(MLX_LINUX_PATH)/libmlx.a
 
-SOURCES_FILES	=	draw_line2.c main.c read_file.c get_next_line.c
+SOURCES_FILES	=	draw.c main.c read_file.c get_next_line.c
 
 SOURCES_DIR		=	sources
 
