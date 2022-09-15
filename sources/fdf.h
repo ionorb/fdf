@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/14 18:36:17 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/15 14:11:49 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,17 @@ typedef struct s_data
 	int		run;
 }	t_data;
 
+typedef	struct s_pt
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_pt;
+
 char	*get_next_line(int fd);
 void	read_file(char *filename, t_data *data);
-//char	**ft_split(char *s, char *str);
-//int		ft_atoi(const char *nptr);
 int		ft_hasnl(char	*str);
-//char	*ft_strjoin(char *s1, char *s2);
 //void	draw_line(int x0, int y0, int x1, int y1, t_data *data);
-void	draw_line(float *pts, t_data *data);
+void	draw_line(t_pt *from, t_pt *to, t_data *data);
 void	draw(t_data *data);
-//void	ft_putnbr_fd(int n, int fd);
-//void	ft_bzero(void *s, size_t n);
 #endif

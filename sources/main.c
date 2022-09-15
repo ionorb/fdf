@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/15 00:29:17 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/15 14:56:12 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	ft_freedata(t_data *data)
 	}
 	free(data->mlx);
 	free(data->win);
-	free(data->img);
-	free(data->addr);
+//	free(data->img);
+//	free(data->addr);
 	free(data->matrix);
 	free(data);
 }
@@ -88,7 +88,6 @@ int	key_press(int key, t_data *data)
 //	mlx_destroy_image(data->mlx, data->img);
 //	free(data->img);
 //	data->img = mlx_new_image(data->mlx, 800, 800);
-	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel), &(data->size_line), &(data->endian));
 	draw(data);
 	return (0);
 }
@@ -114,7 +113,7 @@ int	main(int ac, char **av)
 	data->win = mlx_new_window(data->mlx, 800, 800, "urmom");
 	data->img = mlx_new_image(data->mlx, 800, 800);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel), &(data->size_line), &(data->endian));
-	ft_display(data);
+//	ft_display(data);
 /*	while (i < 800 * 4 * 800)
 	{	
 		data->addr[i] = mlx_get_color_value(data->mlx, 255);

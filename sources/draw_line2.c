@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/15 00:27:19 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/15 21:02:10 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,101 +37,109 @@ float	*arr_cpy(float *arr, int size, int zoom)
 	return (cpy);
 }
 
-void	make3d(float *x, float *y, float z, t_data *data)
+void	make_isometric(t_pt *pt, t_data *data)
 {
 	float	scale;
-	float	x_angle;
-	float	y_angle;
-	float	og;
+	float	previous_x;
+	float	previous_y;
 
-	x_angle = data->x_angle;
-	y_angle = data->y_angle;
 	scale = data->z_scale;
 	scale /= 10;
-	x_angle /= 10;
-	y_angle /= 10;
-	og = *x;
-	*x = (*x - *y) * cos(x_angle);
-	*y = (og + *y) * sin(y_angle) - (z * scale);
+	previous_x = pt->x;
+	previous_y = pt->y;
+	pt->x = (previous_x - previous_y) * cos(0.523599);
+	pt->y = -pt->z * scale + (previous_x + previous_y) * sin(0.523599);
 }
 
-void	draw_line(float *pts, t_data *data)
+void	ft_project(t_pt *pt, t_data *data)
+{
+	pt->x += data->x_offset;
+	pt->y += data->y_offset;
+	make_isometric(pt, data);
+}
+
+void	draw_line(t_pt *from, t_pt *to, t_data *data)
 {
 	float	xstep;
 	float	ystep;
-	float	z0;
-	float	z1;
-	float	*ptz;
+//	float	z0;
+//	float	z1;
+//	float	*ptz;
 	int		max;
 	int		i;
 	int		color;
 
-	z0 = data->matrix[(int)(pts[1] - data->y_offset)][(int)(pts[0] - data->x_offset)];
-	z1 = data->matrix[(int)(pts[3] - data->y_offset)][(int)(pts[2] - data->x_offset)];
-	make3d(&pts[0], &pts[1], z0, data);
-	make3d(&pts[2], &pts[3], z1, data);
-	ptz = arr_cpy(pts, 4, data->zoom);
-	free(pts);
-	xstep = ptz[2] - ptz[0];
-	ystep = ptz[3] - ptz[1];
+	from->x *= data->zoom;
+	from->y *= data->zoom;
+	to->x *= data->zoom;
+	to->y *= data->zoom;
+	xstep = to->x - from->x;
+	ystep = to->y - from->y;
 	if (ft_abs(xstep) >= ft_abs(ystep))
 		max = (int)ft_abs(xstep);
 	else
 		max = (int)ft_abs(ystep);
 	xstep /= max;
 	ystep /= max;
-	while ((int)(ptz[0] - ptz[2]) || (int)(ptz[1] - ptz[3]))
+	while ((int)(from->x - to->x) || (int)(from->y - to->y))
 	{
-		i = ((ptz[0] * (data->bits_per_pixel / 8)) + (ptz[1] * data->size_line));
-//		ft_putnbr_fd(i, 1);
-	//	printf("ptz[0]:%f, ptz[1]:%f\n", ptz[0], ptz[1]);
-		if (ptz[0] >= 0 && ptz[0] < 800 * (data->bits_per_pixel / 8) && ptz[1] >= 0 && ptz[1] <= 800 )
+		i = (((int)(from->x) * (int)(data->bits_per_pixel / 8)) + ((int)(from->y) * (int)(data->size_line)));
+		printf("[%d]\n", data->bits_per_pixel);
+		if (from->x >= 0 && from->x < 800 * (data->bits_per_pixel / 8) && from->y >= 0 && from->y <= 800 )
 		{
-			mlx_pixel_put(data->mlx, data->win, ptz[0], ptz[1], 255);
-		//	write(1, "woo\n", 4);
+	//		mlx_pixel_put(data->mlx, data->win, from->x, from->y, 255);
 			color = 0x1e8a76;
 			data->addr[i] = color;
 			data->addr[i + 1] = color >> 8;
 			data->addr[i + 2] = color >> 16;
 		}
-		ptz[0] += xstep;
-		ptz[1] += ystep;
-	//	write(1, "boo\n", 4);
+		from->x += xstep;
+		from->y += ystep;
 	}
-	free(ptz);
+	write(1, "\n", 1);
 }
 
-float	*make_pts(float x0, float y0, float x1, float y1)
+void	make_pt(float x, float y, t_pt *pt, t_data *data)
 {
-	float	*arr;
-
-	arr = malloc(4 * sizeof (float));
-	arr[0] = x0;
-	arr[1] = y0;
-	arr[2] = x1;
-	arr[3] = y1;
-	return (arr);
+	pt->z = data->matrix[(int)y][(int)x];
+	pt->x = x;
+	pt->y = y;
+	ft_project(pt, data);
 }
 
 void	draw(t_data *data)
 {
 	int		y;
 	int		x;
+	t_pt	*from;
+	t_pt	*to;
 
+	from = malloc(sizeof (t_pt));
+	to = malloc(sizeof (t_pt));
 	ft_bzero(data->addr, 800 * 800 * (data->bits_per_pixel / 8));
-	y = data->y_offset;
-	while (y < data->height + data->y_offset)
+	y = 0;
+	while (y < data->height)
 	{
-		x = data->x_offset;
-		while (x < data->width + data->x_offset)
+		x = 0;
+		while (x < data->width)
 		{
-			if (x < data->width - 1 + data->x_offset)
-				draw_line(make_pts(x, y, x + 1, y), data);
-			if (y < data->height - 1 + data->y_offset)
-				draw_line(make_pts(x, y, x, y + 1), data);
+			if (x < data->width - 1)
+			{
+				make_pt(x, y, from, data);
+				make_pt(x + 1, y, to, data);
+				draw_line(from, to, data);
+			}
+			if (y < data->height - 1)
+			{
+				make_pt(x, y, from, data);
+				make_pt(x, y + 1, to, data);
+				draw_line(from, to, data);
+			}
 			x += 1;
 		}
 		y += 1;
 	}
-//	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	free(from);
+	free(to);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
