@@ -1,35 +1,50 @@
-NAME		= 	fdf.a
+LIBFT_PATH		=	./libs/libft
+LIBFT			=	$(LIBFT_PATH)/libft.a
 
-SRCS		= 	ft_atoi.c ft_split.c main.c read_file.c \
-				get_next_line/get_next_line.c \
-				get_next_line/get_next_line_utils.c \
-				draw_line2.c putnum.c ft_bzero.c
+MLX_LINUX_PATH	=	./libs/mlx-linux
+MLX_LINUX		=	$(MLX_LINUX_PATH)/libmlx.a
 
-OBJS		= 	$(SRCS:.c=.o)
+SOURCES_FILES	=	draw_line2.c main.c read_file.c get_next_line.c
 
-CC			= 	gcc
+SOURCES_DIR		=	sources
 
-CCFLAGS 	= 	-Wall -Werror -Wextra -D BUFFER_SIZE=100
+HEADER			=	$(SOURCES_DIR)/fdf.h
+
+SOURCES			=	$(addprefix $(SOURCES_DIR)/, $(SOURCES_FILES))
+
+OBJECTS			= 	$(SOURCES:.c=.o)
+
+NAME			=	fdf
+
+CC				=	gcc
+RM				=	rm -f
+
+CFLAGS			=	-Wall -Wextra -Werror -D BUFFER_SIZE=100
+MLX_LINUX_FLAGS	=	-L. -lmlx -L. -lXext -lX11 -lm -lbsd
 
 .c.o:
-			$(CC) $(CCFLAGS) -c $< -o $(<:.c=.o)
+				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-$(NAME):	$(OBJS)
-			ar rcs $(NAME) $(OBJS)
+all:			$(NAME)
 
-all:		$(NAME)
+$(NAME):		$(LIBFT) $(MLX_LINUX) $(OBJECTS) $(HEADER)
+				$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLX_LINUX) $(MLX_LINUX_FLAGS) -o $(NAME)
 
-compile:	$(NAME)
-			gcc $(NAME) -o fdf libmlx.dylib -framework OpenGL -framework AppKit
+$(LIBFT):
+				$(MAKE) -C $(LIBFT_PATH)
+
+$(MLX_LINUX):
+				$(MAKE) -C $(MLX_LINUX_PATH)
 
 clean:
-			rm -f $(OBJS) $(BONUS_OBJS)
+				$(MAKE) -C $(LIBFT_PATH) clean
+				$(MAKE) -C $(MLX_LINUX_PATH) clean
+				$(RM) $(OBJECTS)
 
-fclean:		clean
-			rm -f $(NAME)
+fclean:			clean
+				$(MAKE) -C $(LIBFT_PATH) fclean
+				$(RM) $(NAME)
 
-cclean:		compile fclean
+re:				fclean all
 
-re:			fclean all
-
-.PHONY:		all clean fclean re cclean compile
+.PHONY:			all clean fclean re libft minilibx
