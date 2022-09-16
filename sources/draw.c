@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/15 21:20:14 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/16 17:13:56 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,37 @@ int		get_max(float a, float b)
 	return (max);
 }
 
+int	get_color(t_pt *from, t_pt *to, t_data *data)
+{
+	int	color;
+
+	color = 0xffffff;
+	if (from->z == data->tallest || to->z == data->tallest)
+		color = 0x800000;
+	return (color);
+}
+
+void	ft_put_pixel(t_pt *from, t_pt *to, t_data *data)
+{
+	int	i;
+	int	color;
+
+	if (from->x >= 0 && from->x < 800 * (data->bits_per_pixel / 8) && from->y >= 0 && from->y <= 800 )
+	{
+		i = (((int)(from->x) * (int)(data->bits_per_pixel / 8)) + ((int)(from->y) * (int)(data->size_line)));
+//		mlx_pixel_put(data->mlx, data->win, from->x, from->y, 255);
+		color = get_color(from, to, data);
+		data->addr[i] = color;
+		data->addr[i + 1] = color >> 8;
+		data->addr[i + 2] = color >> 16;
+	}
+}
+
 void	draw_line(t_pt *from, t_pt *to, t_data *data)
 {
 	float	xstep;
 	float	ystep;
-	int		i;
 	int		max;
-	int		color;
 
 	xstep = to->x - from->x;
 	ystep = to->y - from->y;
@@ -86,15 +110,7 @@ void	draw_line(t_pt *from, t_pt *to, t_data *data)
 	ystep /= max;
 	while ((int)(from->x - to->x) || (int)(from->y - to->y))
 	{
-		i = (((int)(from->x) * (int)(data->bits_per_pixel / 8)) + ((int)(from->y) * (int)(data->size_line)));
-		if (from->x >= 0 && from->x < 800 * (data->bits_per_pixel / 8) && from->y >= 0 && from->y <= 800 )
-		{
-	//		mlx_pixel_put(data->mlx, data->win, from->x, from->y, 255);
-			color = 0x1e8a76;
-			data->addr[i] = color;
-			data->addr[i + 1] = color >> 8;
-			data->addr[i + 2] = color >> 16;
-		}
+		ft_put_pixel(from, to, data);
 		from->x += xstep;
 		from->y += ystep;
 	}

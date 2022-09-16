@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/15 14:11:49 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/16 17:09:14 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_data
 	int		endian;
 	char	*addr;
 	int		run;
+	int		tallest;
 }	t_data;
 
 typedef	struct s_pt

@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/15 14:56:12 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/16 17:10:08 by yoel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,26 @@ int	key_press(int key, t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	*data;
-//	int		i;
+	int		i;
+	int		j;
 
-//	i = 0;
 	if (ac != 8)
 		return (0);
 	data = malloc(sizeof(t_data));
 	read_file(av[1], data);
-	data->run = 1;
+	data->tallest = 0;
+	i = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			if (data->matrix[i][j] > data->tallest)
+				data->tallest = data->matrix[i][j];
+			j++;
+		}
+		i++;
+	}
 	data->zoom = ft_atoi(av[2]);
 	data->x_offset = ft_atoi(av[3]);
 	data->y_offset = ft_atoi(av[4]);
