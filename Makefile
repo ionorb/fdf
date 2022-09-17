@@ -20,7 +20,7 @@ CC				=	gcc
 RM				=	rm -f
 
 CFLAGS			=	-Wall -Wextra -Werror -D BUFFER_SIZE=100
-MLX_LINUX_FLAGS	=	-L. -lmlx -L. -lXext -lX11 -lm -lbsd
+MLX_LINUX_FLAGS	=	-L. -lXext -L. -lX11 -lm -lbsd
 
 .c.o:
 				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
