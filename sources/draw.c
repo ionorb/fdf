@@ -37,28 +37,7 @@ float	*arr_cpy(float *arr, int size, int zoom)
 	return (cpy);
 }
 
-void	make_isometric(t_pt *pt, t_data *data)
-{
-	float	scale;
-	float	previous_x;
-	float	previous_y;
 
-	scale = data->z_scale;
-	scale /= 10;
-	previous_x = pt->x;
-	previous_y = pt->y;
-	pt->x = (previous_x - previous_y) * cos(0.523599);
-	pt->y = -pt->z * scale + (previous_x + previous_y) * sin(0.523599);
-}
-
-void	ft_project(t_pt *pt, t_data *data)
-{
-	pt->x += data->x_offset;
-	pt->y += data->y_offset;
-	make_isometric(pt, data);
-	pt->x *= data->zoom;
-	pt->y *= data->zoom;
-}
 
 int		get_max(float a, float b)
 {
@@ -86,7 +65,14 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_data *data)
 	int	i;
 	int	color;
 
-	if (from->x >= 0 && from->x < 800 * (data->bits_per_pixel / 8) && from->y >= 0 && from->y <= 800 )
+    // ft_putnbr_fd((int)from->x, 1);
+    // write(1, "\n", 1);
+    // ft_putnbr_fd((int)from->y, 1);
+    // write(1, "\n", 1);
+    // ft_putnbr_fd((int)from->z, 1);
+    // write(1, "\n", 1);
+	//printf("x:%f, y:%f, z:%f\n", from->x, from->y, from->z);
+	if (from->x >= 0 && from->x < 800 * (data->bits_per_pixel / 8) && from->y >= 0 && from->y <= 800)
 	{
 		i = (((int)(from->x) * (int)(data->bits_per_pixel / 8)) + ((int)(from->y) * (int)(data->size_line)));
 //		mlx_pixel_put(data->mlx, data->win, from->x, from->y, 255);
@@ -110,6 +96,7 @@ void	draw_line(t_pt *from, t_pt *to, t_data *data)
 	ystep /= max;
 	while ((int)(from->x - to->x) || (int)(from->y - to->y))
 	{
+		//printf("ban\n");
 		ft_put_pixel(from, to, data);
 		from->x += xstep;
 		from->y += ystep;
@@ -133,6 +120,9 @@ void	draw(t_data *data)
 
 	from = malloc(sizeof (t_pt));
 	to = malloc(sizeof (t_pt));
+	//data->ang_x = 0;
+	//data->ang_y = 0;
+	//data->ang_z = 0;
 	ft_bzero(data->addr, 800 * 800 * (data->bits_per_pixel / 8));
 	y = 0;
 	while (y < data->height)

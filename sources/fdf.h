@@ -33,14 +33,17 @@ typedef struct s_data
 	int		x_offset;
 	int		y_offset;
 	int		z_scale;
-	int		x_angle;
-	int		y_angle;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
 	char	*addr;
-	int		run;
 	int		tallest;
+	float	ang_x;
+	float	ang_y;
+	float	ang_z;
+	int		change_x;
+	int		change_y;
+	int		change_z;
 }	t_data;
 
 typedef	struct s_pt
@@ -53,7 +56,15 @@ typedef	struct s_pt
 char	*get_next_line(int fd);
 void	read_file(char *filename, t_data *data);
 int		ft_hasnl(char	*str);
-//void	draw_line(int x0, int y0, int x1, int y1, t_data *data);
 void	draw_line(t_pt *from, t_pt *to, t_data *data);
 void	draw(t_data *data);
+
+//keypress
+void    ft_offset(int key, t_data *data);
+void    ft_angle(int key, t_data *data);
+void    ft_scale(int key, t_data *data);
+void    ft_zoom(int key, t_data *data);
+
+void	ft_project(t_pt *pt, t_data *data);
+void	make_pt(float x, float y, t_pt *pt, t_data *data);
 #endif
