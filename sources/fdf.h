@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/16 17:09:14 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/19 01:07:53 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ typedef struct s_data
 	float	ang_x;
 	float	ang_y;
 	float	ang_z;
-	int		change_x;
-	int		change_y;
-	int		change_z;
+	int		is_pressed;
 }	t_data;
 
 typedef	struct s_pt
@@ -67,4 +65,5 @@ void    ft_zoom(int key, t_data *data);
 
 void	ft_project(t_pt *pt, t_data *data);
 void	make_pt(float x, float y, t_pt *pt, t_data *data);
+void	make_isometric(t_data *data);
 #endif

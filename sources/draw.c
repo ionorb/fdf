@@ -37,9 +37,7 @@ float	*arr_cpy(float *arr, int size, int zoom)
 	return (cpy);
 }
 
-
-
-int		get_max(float a, float b)
+int	get_max(float a, float b)
 {
 	int	max;
 
@@ -65,17 +63,9 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_data *data)
 	int	i;
 	int	color;
 
-    // ft_putnbr_fd((int)from->x, 1);
-    // write(1, "\n", 1);
-    // ft_putnbr_fd((int)from->y, 1);
-    // write(1, "\n", 1);
-    // ft_putnbr_fd((int)from->z, 1);
-    // write(1, "\n", 1);
-	printf("x:%f, y:%f, z:%f\n", from->x, from->y, from->z);
-	if (from->x >= 0 && from->x < 800 * (data->bits_per_pixel / 8) && from->y >= 0 && from->y <= 800)
+	if (from->x >= 0 && from->x < 1800 * (data->bits_per_pixel / 8) && from->y >= 0 && from->y <= 1200)
 	{
 		i = (((int)(from->x) * (int)(data->bits_per_pixel / 8)) + ((int)(from->y) * (int)(data->size_line)));
-//		mlx_pixel_put(data->mlx, data->win, from->x, from->y, 255);
 		color = get_color(from, to, data);
 		data->addr[i] = color;
 		data->addr[i + 1] = color >> 8;
@@ -96,7 +86,6 @@ void	draw_line(t_pt *from, t_pt *to, t_data *data)
 	ystep /= max;
 	while ((int)(from->x - to->x) || (int)(from->y - to->y))
 	{
-		//printf("ban\n");
 		ft_put_pixel(from, to, data);
 		from->x += xstep;
 		from->y += ystep;
@@ -108,9 +97,8 @@ void	make_pt(float x, float y, t_pt *pt, t_data *data)
 	pt->z = data->matrix[(int)y][(int)x];
 	pt->x = x;
 	pt->y = y;
+	pt->z -= ((pt->z / 10) * data->z_scale) / 5;
 	ft_project(pt, data);
-	//pt->x += 3744;
-	//pt->y += 3800;
 }
 
 void	draw(t_data *data)
@@ -122,15 +110,12 @@ void	draw(t_data *data)
 
 	from = malloc(sizeof (t_pt));
 	to = malloc(sizeof (t_pt));
-	//data->ang_x = 0;
-	//data->ang_y = 0;
-	//data->ang_z = 0;
-	ft_bzero(data->addr, 800 * 800 * (data->bits_per_pixel / 8));
-	y = 0;
-	while (y < data->height)
+	ft_bzero(data->addr, 1200 * 1800 * (data->bits_per_pixel / 8));
+	y = -1;
+	while (++y < data->height)
 	{
-		x = 0;
-		while (x < data->width)
+		x = -1;
+		while (++x < data->width)
 		{
 			if (x < data->width - 1)
 			{
@@ -144,9 +129,7 @@ void	draw(t_data *data)
 				make_pt(x, y + 1, to, data);
 				draw_line(from, to, data);
 			}
-			x += 1;
 		}
-		y += 1;
 	}
 	free(from);
 	free(to);
