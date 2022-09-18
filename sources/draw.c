@@ -71,7 +71,7 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_data *data)
     // write(1, "\n", 1);
     // ft_putnbr_fd((int)from->z, 1);
     // write(1, "\n", 1);
-	//printf("x:%f, y:%f, z:%f\n", from->x, from->y, from->z);
+	printf("x:%f, y:%f, z:%f\n", from->x, from->y, from->z);
 	if (from->x >= 0 && from->x < 800 * (data->bits_per_pixel / 8) && from->y >= 0 && from->y <= 800)
 	{
 		i = (((int)(from->x) * (int)(data->bits_per_pixel / 8)) + ((int)(from->y) * (int)(data->size_line)));
@@ -109,6 +109,8 @@ void	make_pt(float x, float y, t_pt *pt, t_data *data)
 	pt->x = x;
 	pt->y = y;
 	ft_project(pt, data);
+	//pt->x += 3744;
+	//pt->y += 3800;
 }
 
 void	draw(t_data *data)

@@ -95,8 +95,8 @@ int	main(int ac, char **av)
 		i++;
 	}
 	data->zoom = 10;
-	data->x_offset = 5;
-	data->y_offset = 10;
+	data->x_offset = 0;
+	data->y_offset = 0;
 	data->z_scale = 10;
 	data->ang_x = 0;//.523599;
 	data->ang_y = 0;//.523599;

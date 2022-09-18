@@ -2,3 +2,5 @@
 fdf
 a.out
 *.nfs*
+*.o
+*.a

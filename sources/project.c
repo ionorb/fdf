@@ -49,13 +49,18 @@ void	make_isometric(t_pt *pt, t_data *data)
 void	ft_project(t_pt *pt, t_data *data)
 {
     t_pt    *save;
+    t_pt    *origin;
 
+    origin = malloc(sizeof (t_pt));
     save = malloc(sizeof (t_pt));
+    origin->x = data->width / 2 + data->x_offset;
+    origin->y = data->height / 2 + data->y_offset;
+    origin->z = 0;
 	pt->x += data->x_offset;
 	pt->y += data->y_offset;
 	//make_isometric(pt, data);
-    save->x = pt->x;
-    save->y = pt->y;
+    save->x = pt->x - origin->x;
+    save->y = pt->y - origin->y;
     // ft_putnbr_fd((int)pt->x, 1);
     // write(1, "\n", 1);
     // ft_putnbr_fd((int)pt->y, 1);
@@ -71,6 +76,8 @@ void	ft_project(t_pt *pt, t_data *data)
     // write(1, "\n", 1);
     // ft_putnbr_fd((int)pt->z, 1);
     // write(1, "\n", 1);
+    pt->x += origin->x;
+    pt->y += origin->y;
 	pt->x *= data->zoom;
 	pt->y *= data->zoom;
 }
