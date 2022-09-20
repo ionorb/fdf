@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/20 18:22:26 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:41:21 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,49 +84,6 @@ void	draw_line(t_pt *from, t_pt *to, t_data *data)
 		current->y += ystep;
 	}
 	free(current);
-}
-
-float	maxz(t_data *data)
-{
-	int	i;
-	int	j;
-	float	max;
-
-	i = 0;
-	while (i < data->height)
-	{
-		j = 0;
-		while (j < data->width)
-		{
-			if (max < data->matrix[i][j])
-				max = data->matrix[i][j];
-			j++;
-		}
-		i++;
-	}
-	return (max);
-}
-
-float	minz(t_data *data)
-{
-	int	i;
-	int	j;
-	float	min;
-
-	min = maxz(data);
-	i = 0;
-	while (i < data->height)
-	{
-		j = 0;
-		while (j < data->width)
-		{
-			if (min > data->matrix[i][j])
-				min = data->matrix[i][j];
-			j++;
-		}
-		i++;
-	}
-	return (min);
 }
 
 void	make_pt(float x, float y, t_pt *pt, t_data *data)

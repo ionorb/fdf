@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/20 18:13:12 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:43:09 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	rotate_x(t_pt *pt, t_pt *save, t_data *data)
 {
 	save->y = pt->y;
 	save->z = pt->z;
-//	printf("[data->ang_x:%f\n", data->ang_x);
+	printf("[data->ang_x:%f\n", data->ang_x);
 	//printf("\n\n\n\n\nz:%f\n\n\n\n\n\n\n", pt->z);
 	pt->y = save->y * cos(data->ang_x) + save->z * sin(data->ang_x);
 	pt->z = -save->y * sin(data->ang_x) + save->z * cos(data->ang_x);
@@ -25,14 +25,14 @@ void	rotate_x(t_pt *pt, t_pt *save, t_data *data)
 void	rotate_y(t_pt *pt, t_pt *save, t_data *data)
 {
 	save->x = pt->x;
-//	printf("[data->ang_y:%f\n", data->ang_y);
+	printf("[data->ang_y:%f\n", data->ang_y);
 	pt->z = save->z * cos(data->ang_y) - save->x * sin(data->ang_y);
 	pt->x = save->z * sin(data->ang_y) + save->x * cos(data->ang_y);
 }
 
 void	rotate_z(t_pt *pt, t_pt *save, t_data *data)
 {
-//	printf("[data->ang_z:%f\n", data->ang_z);
+	printf("[data->ang_z:%f\n", data->ang_z);
 	pt->x = save->x * cos(data->ang_z) - save->y * sin(data->ang_z);
 	pt->y = save->x * sin(data->ang_z) + save->y * cos(data->ang_z);
 }

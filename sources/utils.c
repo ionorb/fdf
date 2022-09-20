@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:41:50 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/19 17:42:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:41:55 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,47 @@ int	get_max(float a, float b)
 	else
 		max = (int)ft_abs(b);
 	return (max);
+}
+
+float	maxz(t_data *data)
+{
+	int	i;
+	int	j;
+	float	max;
+
+	i = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			if (max < data->matrix[i][j])
+				max = data->matrix[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (max);
+}
+
+float	minz(t_data *data)
+{
+	int	i;
+	int	j;
+	float	min;
+
+	min = maxz(data);
+	i = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			if (min > data->matrix[i][j])
+				min = data->matrix[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (min);
 }

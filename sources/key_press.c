@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:11:52 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/20 18:08:06 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:40:27 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ void    ft_angle(int key, t_data *data)
 		data->ang_z -= 0.1;
 	if (key == 101)
 		data->ang_z += 0.1;
-	if (key == 105)
-		make_isometric(data);
-//	printf("x:%f, y:%f, z:%f\n", data->ang_x, data->ang_y, data->ang_z);
+	printf("x:%f, y:%f, z:%f\n", data->ang_x, data->ang_y, data->ang_z);
 }
 
 void    ft_scale(int key, t_data *data)
@@ -60,4 +58,18 @@ void    ft_zoom(int key, t_data *data)
 	if (key == 45)
 		data->zoom--;
 //	printf("zoom:%d\n", data->zoom);
+}
+
+int	key_press(int key, t_data *data)
+{
+//	ft_putnbr_fd(key, 1);
+//	write(1, "\n", 1);
+	ft_offset(key, data);
+	ft_angle(key, data);
+	ft_scale(key, data);
+	ft_zoom(key, data);
+	if (key == 105)
+		make_isometric(data);
+	draw(data);
+	return (0);
 }

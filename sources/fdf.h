@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/20 18:18:25 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:45:00 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,8 @@ void	make_isometric(t_data *data);
 //utils
 float	ft_abs(int n);
 int	get_max(float a, float b);
+float	maxz(t_data *data);
+float	minz(t_data *data);
+
+int	key_press(int key, t_data *data);
 #endif
