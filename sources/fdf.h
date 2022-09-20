@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/20 18:45:00 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:12:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,9 @@ float	maxz(t_data *data);
 float	minz(t_data *data);
 
 int	key_press(int key, t_data *data);
+
+//color
+float	percentage(int start, int end, int current);
+int	get_color(t_pt *from, t_pt *to, t_pt *current);
+int	get_default_color(int z, t_data *data);
 #endif

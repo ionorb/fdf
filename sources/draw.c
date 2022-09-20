@@ -6,43 +6,11 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/20 18:41:21 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:11:09 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-float	percentage(int start, int end, int current)
-{
-	float	current_loc;
-	float	distance;
-
-	current_loc = current - start;
-	distance = end - start;
-	if (distance == 0)
-		return (1);
-	return (current_loc / distance);
-}
-
-int	get_color(t_pt *from, t_pt *to, t_pt *current)
-{
-	int	r;
-	int	g;
-	int	b;
-	float	percent;
-
-	if (ft_abs(from->x - to->x) > ft_abs(from->y - to->y))
-		percent = percentage(from->x, to->x, current->x);
-	else
-		percent = percentage(from->y, to->y, current->y);
-	r = (int)((1 - percent) * ((from->color >> 16) & 0xFF)
-		+ percent * ((to->color >> 16) & 0xFF));
-	g = (int)((1 - percent) * ((from->color >> 8) & 0xFF)
-		+ percent * ((to->color >> 8) & 0xFF));
-	b = (int)((1 - percent) * ((from->color) & 0xFF)
-		+ percent * ((to->color) & 0xFF));
-	return ((r << 16) | (g << 8) | b);
-}
 
 void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data)
 {
@@ -91,10 +59,11 @@ void	make_pt(float x, float y, t_pt *pt, t_data *data)
 	pt->z = data->matrix[(int)y][(int)x];
 	pt->x = x;
 	pt->y = y;
-	if (pt->z == 0)
+	pt->color = get_default_color(pt->z, data);
+/*	if (pt->z == 0)
 		pt->color = 0x0000FF;
 	else
-		pt->color = 0xFF0000;
+		pt->color = 0xFF0000;*/
 	pt->z -= ((pt->z / 10) * data->z_scale) / 5;
 	ft_project(pt, data);
 }
