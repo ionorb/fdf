@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/20 18:39:24 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:24:44 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	ft_freedata(t_data *data)
 		free(data->matrix[i]);
 		i++;
 	}
-	free(data->mlx);
+	free(data->matrix);
 	free(data->win);
 	if (data->img)
 		free(data->img);
 	if (data->addr)
 		free(data->addr);
-	free(data->matrix);
+	free(data->mlx);
 	free(data);
 }
 

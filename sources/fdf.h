@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/20 19:12:01 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:56:45 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 # include <math.h>
 # include "../libs/mlx-linux/mlx.h"
 # include "../libs/libft/libft.h"
+
+
+/*int	make_color(float percent, int start, int end)
+{
+	return ((int)((1 - percent) * start + percent * end));
+}
+	r = make_color(percent, (from->color >> 16) & 0xFF,
+		(to->color >> 16) & 0xFF);
+	g = make_color(percent, (from->color >> 8) & 0xFF,
+		(to->color >> 8) & 0xFF);
+	b = make_color(percent, (from->color) & 0xFF,
+		(to->color) & 0xFF);*/
 
 typedef struct s_data
 {

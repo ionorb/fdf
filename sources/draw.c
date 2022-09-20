@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/20 19:11:09 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:37:56 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data)
 	int	i;
 	int	color;
 
+	i = to->x;
 	if (current->x > 0 && current->x
 		< (data->winwidth * data->bits_per_pixel / 8)
 			&& current->y > 0 && current->y < data->winheight)
 	{
 		i = (((int)(current->x) * (int)(data->bits_per_pixel / 8))
 			+ ((int)(current->y) * (int)(data->size_line)));
-		color = get_color(from, to, current);
+		color = get_color(from, from, current);
 		data->addr[i] = color;
 		data->addr[i + 1] = color >> 8;
 		data->addr[i + 2] = color >> 16;
@@ -60,10 +61,6 @@ void	make_pt(float x, float y, t_pt *pt, t_data *data)
 	pt->x = x;
 	pt->y = y;
 	pt->color = get_default_color(pt->z, data);
-/*	if (pt->z == 0)
-		pt->color = 0x0000FF;
-	else
-		pt->color = 0xFF0000;*/
 	pt->z -= ((pt->z / 10) * data->z_scale) / 5;
 	ft_project(pt, data);
 }
