@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:11:52 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/20 18:40:27 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:51:57 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void    ft_angle(int key, t_data *data)
 		data->ang_z -= 0.1;
 	if (key == 101)
 		data->ang_z += 0.1;
-	printf("x:%f, y:%f, z:%f\n", data->ang_x, data->ang_y, data->ang_z);
+//	printf("x:%f, y:%f, z:%f\n", data->ang_x, data->ang_y, data->ang_z);
 }
 
 void    ft_scale(int key, t_data *data)

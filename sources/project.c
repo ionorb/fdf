@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/20 18:43:09 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:01:26 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	rotate_x(t_pt *pt, t_pt *save, t_data *data)
 {
 	save->y = pt->y;
 	save->z = pt->z;
-	printf("[data->ang_x:%f\n", data->ang_x);
+//	printf("[data->ang_x:%f\n", data->ang_x);
 	//printf("\n\n\n\n\nz:%f\n\n\n\n\n\n\n", pt->z);
 	pt->y = save->y * cos(data->ang_x) + save->z * sin(data->ang_x);
 	pt->z = -save->y * sin(data->ang_x) + save->z * cos(data->ang_x);
@@ -25,14 +25,14 @@ void	rotate_x(t_pt *pt, t_pt *save, t_data *data)
 void	rotate_y(t_pt *pt, t_pt *save, t_data *data)
 {
 	save->x = pt->x;
-	printf("[data->ang_y:%f\n", data->ang_y);
+//	printf("[data->ang_y:%f\n", data->ang_y);
 	pt->z = save->z * cos(data->ang_y) - save->x * sin(data->ang_y);
 	pt->x = save->z * sin(data->ang_y) + save->x * cos(data->ang_y);
 }
 
 void	rotate_z(t_pt *pt, t_pt *save, t_data *data)
 {
-	printf("[data->ang_z:%f\n", data->ang_z);
+//	printf("[data->ang_z:%f\n", data->ang_z);
 	pt->x = save->x * cos(data->ang_z) - save->y * sin(data->ang_z);
 	pt->y = save->x * sin(data->ang_z) + save->y * cos(data->ang_z);
 }
@@ -61,8 +61,10 @@ void	make_isometric(t_data *data)
 	i = 0;
 	while (i < 10)
 	{
-		data->x_offset += (12 - cpy->x_offset) / 10;
-		data->y_offset += (8 - cpy->y_offset) / 10;
+		data->x_offset += ((data->winwidth / 2) / 42 - cpy->x_offset
+			- data->width / 2 + 1) / 10;
+		data->y_offset += ((data->winheight / 2) / 42 - cpy->y_offset
+			- data->height / 2) / 10;
 		data->ang_x += (-0.5 - cpy->ang_x) / 10;
 		data->ang_y += (0 - cpy->ang_y) / 10;
 		data->ang_z += (0.8 - cpy->ang_z) / 10;
