@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/19 17:29:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:04:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,12 @@ int	mouse_press(int button, int x, int y, t_data *data)
 	return (0);
 }
 
-int		ft_close(void *param)
-{
-	(void)param;
-	exit(0);
-}
-
 void	setup_controls(t_data *data)
 {
 	mlx_hook(data->win, 2, 0, key_press, data);
 	mlx_hook(data->win, 17, 0, ft_close, data);
 	mlx_hook(data->win, 4, 0, mouse_press, data);
 }
-
 
 int	main(int ac, char **av)
 {

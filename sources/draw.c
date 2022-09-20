@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/20 17:13:17 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:22:26 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	get_color(t_pt *from, t_pt *to, t_pt *current)
 	int	b;
 	float	percent;
 
-	percent = percentage(from->x, to->x, current->x);
+	if (ft_abs(from->x - to->x) > ft_abs(from->y - to->y))
+		percent = percentage(from->x, to->x, current->x);
+	else
+		percent = percentage(from->y, to->y, current->y);
 	r = (int)((1 - percent) * ((from->color >> 16) & 0xFF)
 		+ percent * ((to->color >> 16) & 0xFF));
 	g = (int)((1 - percent) * ((from->color >> 8) & 0xFF)
@@ -46,8 +49,9 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data)
 	int	i;
 	int	color;
 
-	if (current->x > 0 && current->x < data->winwidth
-		&& current->y > 0 && current->y < data->winheight)
+	if (current->x > 0 && current->x
+		< (data->winwidth * data->bits_per_pixel / 8)
+			&& current->y > 0 && current->y < data->winheight)
 	{
 		i = (((int)(current->x) * (int)(data->bits_per_pixel / 8))
 			+ ((int)(current->y) * (int)(data->size_line)));
@@ -134,7 +138,6 @@ void	make_pt(float x, float y, t_pt *pt, t_data *data)
 		pt->color = 0x0000FF;
 	else
 		pt->color = 0xFF0000;
-//	pt->color = get_default_color(minz(data), maxz(data), pt->z, data);
 	pt->z -= ((pt->z / 10) * data->z_scale) / 5;
 	ft_project(pt, data);
 }

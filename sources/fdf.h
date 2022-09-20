@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/20 16:15:35 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:18:25 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,24 @@
 
 typedef struct s_data
 {
-	int		height;
-	int		width;
-	int		**matrix;
+	int	height;
+	int	width;
+	int	**matrix;
 	void	*mlx;
 	void	*win;
 	void	*img;
-	float		zoom;
-	int		x_offset;
-	int		y_offset;
-	int		z_scale;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
+	float	zoom;
+	float	x_offset;
+	float	y_offset;
+	float	z_scale;
+	int	bits_per_pixel;
+	int	size_line;
+	int	endian;
 	char	*addr;
-	int		tallest;
 	float	ang_x;
 	float	ang_y;
 	float	ang_z;
-	int		is_pressed;
+	int	is_pressed;
 	int	winheight;
 	int	winwidth;
 }	t_data;
@@ -59,7 +58,10 @@ void	read_file(char *filename, t_data *data);
 int	ft_hasnl(char	*str);
 //void	draw_line(t_pt *from, t_pt *to, t_data *data);
 void	draw(t_data *data);
+
+//init
 t_data	*ft_init_data(char **av);
+int	ft_close(void *data);
 
 //keypress
 void    ft_offset(int key, t_data *data);
