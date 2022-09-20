@@ -5,7 +5,7 @@ MLX_LINUX_PATH		=	./libs/mlx-linux
 MLX_LINUX		=	$(MLX_LINUX_PATH)/libmlx.a
 
 SOURCES_FILES		=	draw.c main.c read_file.c get_next_line.c \
-				key_press.c project.c
+				key_press.c project.c init.c utils.c
 
 SOURCES_DIR		=	sources
 

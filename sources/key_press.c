@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:11:52 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/19 00:16:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:57:05 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    ft_offset(int key, t_data *data)
 		data->x_offset--;
 	if (key == 65363)
 		data->x_offset++;
-	printf("x:%d, y:%d\n", data->x_offset, data->y_offset);
+	//printf("x:%d, y:%d\n", data->x_offset, data->y_offset);
 }
 
 void    ft_angle(int key, t_data *data)

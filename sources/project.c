@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/19 01:07:25 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:02:54 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	make_isometric(t_data *data)
 	i = 0;
 	while (i < 10)
 	{
-	//	printf("xodd:%f, yoff:%f zoom:%f scale:%f \n", data->x_offset, data->y_offset, data->zoom, data->z_scale);
+		printf("xoff:%d yoff:%d zoom:%f scale:%d \n", data->x_offset, data->y_offset, data->zoom, data->z_scale);
 		data->x_offset += (12 - cpy->x_offset) / 10;
 		data->y_offset += (8 - cpy->y_offset) / 10;
 		data->ang_x += (-0.5 - cpy->ang_x) / 10;
