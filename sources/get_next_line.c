@@ -6,13 +6,13 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:40:31 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/14 18:46:20 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/20 22:26:19 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		ft_hasnl(char *str)
+int	ft_hasnl(char *str)
 {
 	int	i;
 
@@ -25,7 +25,6 @@ int		ft_hasnl(char *str)
 	}
 	return (0);
 }
-
 
 char	*ft_cutcopy(char *line, char *save)
 {
@@ -79,9 +78,7 @@ char	*get_next_line(int fd)
 		if (i < 0)
 			return (NULL);
 		buf[i] = '\0';
-	//	printf("buf:%s\n", buf);
 		save = ft_strjoin(save, buf);
-	//	write(1, "ban\n", 4);
 	}
 	if (!save || save[0] == 0)
 		return (NULL);

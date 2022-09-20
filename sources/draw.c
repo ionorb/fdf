@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/20 21:37:56 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:39:32 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data)
 
 	i = to->x;
 	if (current->x > 0 && current->x
-		< (data->winwidth * data->bits_per_pixel / 8)
-			&& current->y > 0 && current->y < data->winheight)
+		< (data->winwidth * (data->bits_per_pixel / 8))
+		&& current->y > 0 && current->y < data->winheight)
 	{
 		i = (((int)(current->x) * (int)(data->bits_per_pixel / 8))
-			+ ((int)(current->y) * (int)(data->size_line)));
-		color = get_color(from, from, current);
+				+ ((int)(current->y) * (int)(data->size_line)));
+		color = get_color(from, to, current);
 		data->addr[i] = color;
 		data->addr[i + 1] = color >> 8;
 		data->addr[i + 2] = color >> 16;
@@ -36,7 +36,7 @@ void	draw_line(t_pt *from, t_pt *to, t_data *data)
 	float	xstep;
 	float	ystep;
 	t_pt	*current;
-	int	max;
+	int		max;
 
 	current = malloc(sizeof (t_pt));
 	current->x = from->x;
@@ -65,21 +65,16 @@ void	make_pt(float x, float y, t_pt *pt, t_data *data)
 	ft_project(pt, data);
 }
 
-void	draw(t_data *data)
+void	make_grid(t_pt *from, t_pt *to, t_data *data)
 {
-	int	y;
-	int	x;
-	t_pt	*from;
-	t_pt	*to;
+	int		y;
+	int		x;
 
-	from = malloc(sizeof (t_pt));
-	to = malloc(sizeof (t_pt));
-	ft_bzero(data->addr, 1200 * 1800 * (data->bits_per_pixel / 8));
-	y = -1;
-	while (++y < data->height)
+	y = 0;
+	while (y < data->height)
 	{
-		x = -1;
-		while (++x < data->width)
+		x = 0;
+		while (x < data->width)
 		{
 			if (x < data->width - 1)
 			{
@@ -93,8 +88,21 @@ void	draw(t_data *data)
 				make_pt(x, y + 1, to, data);
 				draw_line(from, to, data);
 			}
+			x++;
 		}
+		y++;
 	}
+}
+
+void	draw(t_data *data)
+{
+	t_pt	*from;
+	t_pt	*to;
+
+	from = malloc(sizeof (t_pt));
+	to = malloc(sizeof (t_pt));
+	ft_bzero(data->addr, data->winheight * data->winwidth * (data->bits_per_pixel / 8));
+	make_grid(from, to, data);
 	free(from);
 	free(to);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);

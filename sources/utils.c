@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:41:50 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/20 18:41:55 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:23:48 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	get_max(float a, float b)
 
 float	maxz(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	float	max;
 
 	i = 0;
@@ -56,8 +56,8 @@ float	maxz(t_data *data)
 
 float	minz(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	float	min;
 
 	min = maxz(data);

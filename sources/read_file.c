@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:46:28 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/14 22:26:35 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/20 22:23:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ int	get_height(char	*filename)
 
 	fd = open(filename, O_RDONLY, 0);
 	i = 0;
-//	ft_putnbr_fd(fd, 1);
 	line = get_next_line(fd);
-//	write(1, "ban\n", 4);
 	while (line)
 	{
 		free(line);

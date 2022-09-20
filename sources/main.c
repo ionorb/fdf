@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/20 21:24:44 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:17:11 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ int	main(int ac, char **av)
 	data = ft_init_data(av);
 	make_isometric(data);
 	setup_controls(data);
-//	draw(data);
-//	mlx_hook(data->win, 2, 1, key_press, data);
-//	mlx_hook(data->win, 17, 0, ft_close, data);
 	mlx_loop(data->mlx);
 	ft_freedata(data);
 	return (0);
