@@ -6,31 +6,11 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/20 22:17:11 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/21 16:48:21 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	ft_freedata(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i <= data->height)
-	{
-		free(data->matrix[i]);
-		i++;
-	}
-	free(data->matrix);
-	free(data->win);
-	if (data->img)
-		free(data->img);
-	if (data->addr)
-		free(data->addr);
-	free(data->mlx);
-	free(data);
-}
 
 int	mouse_press(int button, int x, int y, t_data *data)
 {
@@ -53,7 +33,7 @@ int	main(int ac, char **av)
 	if (ac != 4)
 		return (0);
 	data = ft_init_data(av);
-	make_isometric(data);
+//	make_isometric(data);
 	setup_controls(data);
 	mlx_loop(data->mlx);
 	ft_freedata(data);

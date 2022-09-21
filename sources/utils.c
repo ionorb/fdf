@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:41:50 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/20 22:23:48 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:59:07 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ float	maxz(t_data *data)
 {
 	int		i;
 	int		j;
-	float	max;
+	float		max;
 
+	max = data->matrix[0][0];
 	i = 0;
 	while (i < data->height)
 	{
@@ -60,7 +61,7 @@ float	minz(t_data *data)
 	int		j;
 	float	min;
 
-	min = maxz(data);
+	min = data->matrix[0][0];
 	i = 0;
 	while (i < data->height)
 	{

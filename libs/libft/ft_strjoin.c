@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:03:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/14 18:42:58 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/21 17:02:08 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -34,5 +34,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	str[i] = '\0';
+	if (s1)
+		free(s1);
 	return (str);
 }

@@ -6,33 +6,23 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 00:41:58 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/21 18:00:44 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:31:23 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_abs(int n)
-{
-	long	num;
-
-	num = (long)n;
-	if (num < 0)
-		return (num *= -1);
-	return (num);
-}
-
-void	plotlow(int x0, int y0, int x1, int y1, t_data *data)
+void	plotlow(t_pt *from, t_pt *to, t_data *data)
 {
 	int	dx;
 	int	dy;
 	int	yi;
-	int	x;
-	int	y;
 	int	D;
+	t_pt *current;
 
-	dx = x1 - x0;
-    dy = y1 - y0;
+	current = malloc(sizeof (t_pt));
+	dx = to->x - from->x;
+    dy = to->y - from->y;
     yi = 1;
     if (dy < 0)
 	{
@@ -40,37 +30,33 @@ void	plotlow(int x0, int y0, int x1, int y1, t_data *data)
         dy = -dy;
 	}
     D = (2 * dy) - dx;
-    y = y0;
-	x = x0;
-    while(x <= x1)
+    current->y = from->y;
+	current->x = from->x;
+    while(current->x <= to->x)
 	{
-       // mlx_pixel_put(data->mlx, data->win, x, y, 0xffffff);//plot(x, y)
-	    pt = malloc(sizeof (t_pt));
-		pt->x = x;
-		pt->y = y;
-		ft_put_pixel(pt, pt, pt, data);
+		ft_put_pixel(from, to, current, data);
         if (D > 0)
 		{
-            y = y + yi;
+            current->y = current->y + yi;
             D = D + (2 * (dy - dx));
 		}
         else
             D = D + 2 * dy;
-		x++;
+		current->x++;
 	}
 }
 
-void	plothigh(int x0, int y0, int x1, int y1, t_data *data)
+void	plothigh(t_pt *from, t_pt *to, t_data *data)
 {
 	int	dx;
 	int	dy;
 	int	xi;
-	int	x;
-	int	y;
 	int	D;
+	t_pt *current;
 
-	dx = x1 - x0;
-    dy = y1 - y0;
+	current = malloc(sizeof (t_pt));
+	dx = to->x - from->x;
+    dy = to->y - from->y;
     xi = 1;
     if (dx < 0)
 	{
@@ -78,40 +64,36 @@ void	plothigh(int x0, int y0, int x1, int y1, t_data *data)
         dx = -dx;
 	}
     D = (2 * dx) - dy;
-    y = y0;
-	x = x0;
-    while(y <= y1)
+    current->y = from->y;
+	current->x = from->x;
+    while(current->y <= to->y)
 	{
-        //mlx_pixel_put(data->mlx, data->win, x, y, 0xffffff);//plot(x, y)
-	    pt = malloc(sizeof (t_pt));
-		pt->x = x;
-		pt->y = y;
-		ft_put_pixel(pt, pt, pt, data);
+		ft_put_pixel(from, to, current, data);
         if (D > 0)
 		{
-            x = x + xi;
+            current->x = current->x + xi;
             D = D + (2 * (dx - dy));
 		}
         else
             D = D + 2 * dx;
-		y++;
+		current->y++;
 	}
 }
 
-void	draw_line(int x0, int y0, int x1, int y1, t_data *data)
+void	draw_line_v2(t_pt *from, t_pt *to, t_data *data)
 {
-	if (ft_abs(y1 - y0) < ft_abs(x1 - x0))
+	if (ft_abs(to->y - from->y) < ft_abs(to->x - from->x))
 	{
-		if (x0 > x1)
-			plotlow(x1, y1, x0, y0, data);
+		if (from->x > to->x)
+			plotlow(to, from, data);
 		else
-			plotlow(x0, y0, x1, y1, data);
+			plotlow(from, to, data);
 	}
 	else
 	{
-		if (y0 > y1)
-			plothigh(x1, y1, x0, y0, data);
+		if (from->y > to->y)
+			plothigh(to, from, data);
 		else
-			plothigh(x0, y0, x1, y1, data);
+			plothigh(from, to, data);
 	}
 }

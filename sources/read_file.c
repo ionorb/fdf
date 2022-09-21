@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:46:28 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/20 22:23:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/21 16:52:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	get_width(char	*filename)
 	fd = open(filename, O_RDONLY, 0);
 	line = get_next_line(fd);
 	numbers = ft_split(line, " \n");
+	free(line);
 	i = 0;
 	while (numbers[i])
 	{
@@ -57,7 +58,7 @@ int	get_width(char	*filename)
 	free(line);
 	close(fd);
 	free(numbers);
-	free(line);
+//	free(line);
 	return (i);
 }
 

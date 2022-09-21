@@ -6,14 +6,39 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/20 22:15:41 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:49:42 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	ft_freedata(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i <= data->height)
+	{
+		free(data->matrix[i]);
+		i++;
+	}
+	free(data->matrix);
+	free(data->win);
+	if (data->img)
+		free(data->img);
+/*	if (data->addr)
+	{
+		free(data->addr);
+		write(1, "noo\n", 4);
+	}*/
+	free(data->mlx);
+	free(data);
+	printf("boo\n");
+}
+
 int	ft_close(void *data)
 {
+	ft_freedata(data);
 	(void)data;
 	exit(0);
 }

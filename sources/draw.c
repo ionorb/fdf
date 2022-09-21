@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/20 22:39:32 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:27:35 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	draw(t_data *data)
 	from = malloc(sizeof (t_pt));
 	to = malloc(sizeof (t_pt));
 	ft_bzero(data->addr, data->winheight * data->winwidth * (data->bits_per_pixel / 8));
+	printf("sizelind:%d\n", data->size_line);
+//	printf("height:%d, width:%d\n", data->winheight, data->winwidth);
 	make_grid(from, to, data);
 	free(from);
 	free(to);
