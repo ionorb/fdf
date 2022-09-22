@@ -6,14 +6,14 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 15:36:55 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/14 17:04:56 by yoel             ###   ########.fr       */
+/*   Updated: 2022/09/21 19:59:59 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t			i;
+	size_t	i;
 
 	i = 0;
 	while (i < n)

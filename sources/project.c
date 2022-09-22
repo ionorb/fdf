@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/21 17:24:46 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:25:06 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,20 @@ void	make_isometric(t_data *data)
 
 	cpy = cpy_struc(data);
 	i = 0;
-	while (i < 10)
+	while (i < 100)
 	{
 		data->x_offset += ((data->winwidth / 2) / 42 - cpy->x_offset
-				- data->width / 2 + 1) / 10;
+				- data->width / 2 + 1) / 100;
 		data->y_offset += ((data->winheight / 2) / 42 - cpy->y_offset
-				- data->height / 2) / 10;
-		data->ang_x += (-0.5 - cpy->ang_x) / 10;
-		data->ang_y += (0 - cpy->ang_y) / 10;
-		data->ang_z += (0.8 - cpy->ang_z) / 10;
-		data->zoom += (42 - cpy->zoom) / 10;
-		data->z_scale += (42 - cpy->z_scale) / 10;
-		data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
-		data->addr = mlx_get_data_addr(data->img,
-				&(data->bits_per_pixel), &(data->size_line), &(data->endian));
+				- data->height / 2) / 100;
+		data->ang_x += (-0.5 - cpy->ang_x) / 100;
+		data->ang_y += (0 - cpy->ang_y) / 100;
+		data->ang_z += (0.8 - cpy->ang_z) / 100;
+		data->zoom += (42 - cpy->zoom) / 100;
+		data->z_scale += (42 - cpy->z_scale) / 100;
+//		data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
+//		data->addr = mlx_get_data_addr(data->img,
+//				&(data->bits_per_pixel), &(data->size_line), &(data->endian));
 		draw(data);
 		i++;
 	}

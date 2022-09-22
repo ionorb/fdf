@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/21 12:49:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:22:35 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_freedata(t_data *data)
 	}
 	free(data->matrix);
 	free(data->win);
-	if (data->img)
-		free(data->img);
+//	if (data->img)
+//	free(data->img);
 /*	if (data->addr)
 	{
 		free(data->addr);
@@ -70,5 +70,6 @@ t_data	*ft_init_data(char **av)
 	data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
 			&(data->size_line), &(data->endian));
+	printf("bananaooooooooooooooo\n");
 	return (data);
 }

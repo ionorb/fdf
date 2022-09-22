@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/21 19:27:35 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:24:03 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data)
 	int	i;
 	int	color;
 
-	i = to->x;
-	if (current->x > 0 && current->x
-		< (data->winwidth * (data->bits_per_pixel / 8))
-		&& current->y > 0 && current->y < data->winheight)
+	if (current->x > 0 && current->x < data->size_line / 4 && current->y > 0 && current->y < data->winheight * data->size_line)
 	{
 		i = (((int)(current->x) * (int)(data->bits_per_pixel / 8))
 				+ ((int)(current->y) * (int)(data->size_line)));
@@ -101,8 +98,12 @@ void	draw(t_data *data)
 
 	from = malloc(sizeof (t_pt));
 	to = malloc(sizeof (t_pt));
-	ft_bzero(data->addr, data->winheight * data->winwidth * (data->bits_per_pixel / 8));
-	printf("sizelind:%d\n", data->size_line);
+	mlx_destroy_image(data->mlx, data->img);
+	data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
+//	free(data->addr);
+	data->addr = mlx_get_data_addr(data->img,
+			&(data->bits_per_pixel), &(data->size_line), &(data->endian));
+//	ft_bzero(data->addr, data->winheight * data->size_line);
 //	printf("height:%d, width:%d\n", data->winheight, data->winwidth);
 	make_grid(from, to, data);
 	free(from);
