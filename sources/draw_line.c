@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 00:41:58 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/21 19:31:23 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:26:44 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	plotlow(t_pt *from, t_pt *to, t_data *data)
             D = D + 2 * dy;
 		current->x++;
 	}
+	free(current);
 }
 
 void	plothigh(t_pt *from, t_pt *to, t_data *data)
@@ -78,6 +79,7 @@ void	plothigh(t_pt *from, t_pt *to, t_data *data)
             D = D + 2 * dx;
 		current->y++;
 	}
+	free(current);
 }
 
 void	draw_line_v2(t_pt *from, t_pt *to, t_data *data)

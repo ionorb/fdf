@@ -6,17 +6,17 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:41:50 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/21 12:59:07 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:58:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-float	ft_abs(int n)
+float	ft_abs(float n)
 {
-	long	num;
+	float	num;
 
-	num = (long)n;
+	num = (float)n;
 	if (num < 0)
 		return (num *= -1);
 	return (num);

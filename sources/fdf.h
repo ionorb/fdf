@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/21 18:43:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:37:22 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	rotate_y(t_pt *pt, t_pt *save, t_data *data);
 void	rotate_z(t_pt *pt, t_pt *save, t_data *data);
 
 //utils
-float	ft_abs(int n);
+float	ft_abs(float n);
 int		get_max(float a, float b);
 float	maxz(t_data *data);
 float	minz(t_data *data);
