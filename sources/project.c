@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/22 17:57:03 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:38:24 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ t_data	*cpy_struc(t_data *data)
 float	angle_range(float end, float start)
 {
 		printf("end:%f, stsart:%f, diff:%f\n", end, start, ft_abs(start - end));
-		while (ft_abs(start - end) > 6.283)
-		{
-				if (end > start)
-						end -= 6.283;
-				else if (start > end)
-						end += 6.283;
-		}
-		return (ft_abs(start - end));
+		while (start > 6.283)
+				start -= 6.283;
+		while (start < -6.283)
+				start += 6.283;
+		printf("end:%f, stsart:%f, diff:%f\n", end, start, ft_abs(start - end));
+		return ((end - start) / 100);
 }
 
 void	make_isometric(t_data *data)
@@ -54,8 +52,9 @@ void	make_isometric(t_data *data)
 		data->y_offset += ((data->winheight / 2) / 42 - cpy->y_offset
 				- data->height / 2) / 100;
 		data->ang_x += angle_range(-0.5, cpy->ang_x);//(-0.5 - cpy->ang_x) / 100;
-		data->ang_y += angle_range(0, cpy->ang_x);//(0 - cpy->ang_y) / 100;
-		data->ang_z += angle_range(0.8, cpy->ang_x);//(0.8 - cpy->ang_z) / 100;
+		data->ang_y += angle_range(0, cpy->ang_y);//(0 - cpy->ang_y) / 100;
+		printf("ang_y:%f, diff:%f\n", data->ang_y, angle_range(0, cpy->ang_x));
+		data->ang_z += angle_range(0.8, cpy->ang_z);//(0.8 - cpy->ang_z) / 100;
 		data->zoom += (42 - cpy->zoom) / 100;
 		data->z_scale += (42 - cpy->z_scale) / 100;
 //		data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
