@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/26 12:28:32 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:35:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	make_grid(t_pt *from, t_pt *to, t_data *data)
 	int		x;
 
 	y = 0;
+	clock_t	startz = clock();
 	while (y < data->height)
 	{
 		x = 0;
@@ -78,18 +79,20 @@ void	make_grid(t_pt *from, t_pt *to, t_data *data)
 			{
 				make_pt(x, y, from, data);
 				make_pt(x + 1, y, to, data);
-				draw_line_v2(from, to, data);
+				draw_line(from, to, data);
 			}
 			if (y < data->height - 1)
 			{
 				make_pt(x, y, from, data);
 				make_pt(x, y + 1, to, data);
-				draw_line_v2(from, to, data);
+				draw_line(from, to, data);
 			}
 			x++;
 		}
 		y++;
 	}
+	clock_t	endz = clock();
+	printf("time:%f\n", (double)(endz - startz) / CLOCKS_PER_SEC);
 }
 
 void	draw(t_data *data)

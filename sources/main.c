@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/26 12:29:10 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:01:13 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,15 @@ void	setup_controls(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	*data;
+	time_t begin, end;
 
+	time(&begin);
 	if (ac != 4)
 		return (0);
 	data = ft_init_data(av);
 	setup_controls(data);
+	time(&end);
+	printf("time:%ld\n", end - begin);
 	mlx_loop(data->mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/22 17:37:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:47:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+# include <time.h>
 # include "../libs/mlx-linux/mlx.h"
 # include "../libs/libft/libft.h"
 
@@ -52,6 +53,7 @@ typedef struct s_data
 	float	x_offset;
 	float	y_offset;
 	float	z_scale;
+	float	scaler;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
@@ -62,6 +64,8 @@ typedef struct s_data
 	int		is_pressed;
 	int		winheight;
 	int		winwidth;
+	float	maxz;
+	float	minz;
 }	t_data;
 
 typedef struct s_pt

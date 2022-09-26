@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/26 12:29:01 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:51:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ t_data	*ft_init_data(char **av)
 	data = malloc(sizeof (t_data));
 	read_file(av[1], data);
 	init_pos(data);
+	data->scaler = 1;
+	data->maxz = maxz(data);
+	data->minz = minz(data);
 	data->winwidth = ft_atoi(av[2]);
 	data->winheight = ft_atoi(av[3]);
 	data->mlx = mlx_init();

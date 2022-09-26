@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:05:36 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/20 22:44:00 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:28:00 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	get_default_color(int z, t_data *data)
 {
 	float	percent;
 
-	percent = ft_percentage(minz(data), maxz(data), z);
+	percent = ft_percentage(data->minz, data->maxz, z);
 	if (percent < 0.25)
 		return (make_color(ft_percentage(0, 250, percent * 1000),
 				BLUE, PURPLE));

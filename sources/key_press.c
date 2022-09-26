@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:11:52 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/21 12:34:36 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:57:15 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	ft_offset(int key, t_data *data)
 {
 	if (key == 65362)
-		data->y_offset -= 0.1;
+		data->y_offset -= data->scaler * data->scaler / 2 * 0.1;
 	if (key == 65364)
-		data->y_offset += 0.1;
+		data->y_offset += data->scaler * data->scaler / 2 * 0.1;
 	if (key == 65361)
-		data->x_offset -= 0.1;
+		data->x_offset -= data->scaler * data->scaler / 2 * 0.1;
 	if (key == 65363)
-		data->x_offset += 0.1;
+		data->x_offset += data->scaler * data->scaler / 2 * 0.1;
+	if (key >= 49 && key <= 57)
+		data->scaler = key - 48;
 }
 
 void	ft_angle(int key, t_data *data)
