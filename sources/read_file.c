@@ -6,19 +6,24 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:46:28 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/26 12:29:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:19:56 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	get_height(char	*filename)
+int	get_height(char	*filename, t_data *data)
 {
 	int		i;
 	int		fd;
 	char	*line;
 
 	fd = open(filename, O_RDONLY, 0);
+	if (fd < 0)
+	{
+		free(data);
+		exit(0);
+	}
 	i = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -83,7 +88,7 @@ void	read_file(char *filename, t_data *data)
 	int		i;
 	int		fd;
 
-	data->height = get_height(filename);
+	data->height = get_height(filename, data);
 	data->width = get_width(filename);
 	i = -1;
 	data->matrix = malloc((data->height + 1) * sizeof (int *));
