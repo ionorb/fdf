@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:46:28 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/25 19:50:23 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 11:41:53 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	read_file(char *filename, t_data *data)
 		data->matrix[i] = malloc((data->width + 1) * sizeof (int));
 	fd = open(filename, O_RDONLY, 0);
 	i = 0;
-	printf("starthere\n");
 	while (i < data->height)
 	{
 		line = get_next_line(fd);
@@ -100,6 +99,9 @@ void	read_file(char *filename, t_data *data)
 		free(line);
 		i++;
 	}
+	line = get_next_line(fd);
+	line = get_next_line(fd);
+	free(line);
 	data->matrix[i] = NULL;
 	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/25 19:20:22 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 11:05:26 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_freedata(t_data *data)
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	free(data);
-	printf("boo\n");
 }
 
 int	ft_close(void *data)
@@ -65,6 +64,5 @@ t_data	*ft_init_data(char **av)
 	data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
 			&(data->size_line), &(data->endian));
-	printf("bananaooooooooooooooo\n");
 	return (data);
 }

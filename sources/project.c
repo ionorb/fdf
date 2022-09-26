@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/24 17:34:09 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:25:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,35 @@ t_data	*cpy_struc(t_data *data)
 float	angle_range(float end, float start)
 {
 	while (start > 6.283)
-			start -= 6.283;
+		start -= 6.283;
 	while (start < -6.283)
-			start += 6.283;
-	if (ft_abs(end - start + 6.283) < ft_abs(end - start) || ft_abs(end - start - 6.283) < ft_abs(end - start))
+		start += 6.283;
+	if (ft_abs(end - start + 6.283) < ft_abs(end - start)
+			|| ft_abs(end - start - 6.283) < ft_abs(end - start))
 	{
-			if (ft_abs(end - start + 6.283) < ft_abs(end - start - 6.283))
-					return ((end - start + 6.283) / 100);
-			else
-					return ((end - start - 6.283) / 100);
+		if (ft_abs(end - start + 6.283) < ft_abs(end - start - 6.283))
+			return ((end - start + 6.283) / 100);
+		else
+			return ((end - start - 6.283) / 100);
 	}
 	return ((end - start) / 100);
 }
+
+int	ft_struc_cmp(t_data *data, t_data *cpy)
+{
+	float	diff;
+
+	diff = 0;
+	diff += ft_abs(cpy->x_offset - ((data->winwidth / 2) / 42 - data->width / 2 + 1));
+	diff += ft_abs(cpy->y_offset - ((data->winheight / 2) / 42 - data->height / 2));
+	diff += ft_abs(cpy->ang_x - (-0.5)) * 5;
+	diff += ft_abs(cpy->ang_y - 0) * 5;
+	diff += ft_abs(cpy->ang_z - 0.8) * 5;
+	diff += ft_abs(cpy->zoom - 42) * 5;
+	diff += ft_abs(cpy->z_scale - 42) * 5;
+	return ((int)ft_abs(diff));
+}
+		
 
 void	make_isometric(t_data *data)
 {
@@ -50,7 +67,7 @@ void	make_isometric(t_data *data)
 
 	cpy = cpy_struc(data);
 	i = 0;
-	while (i < 100)
+	while (ft_struc_cmp(data, cpy) && i < 100)
 	{
 		data->x_offset += ((data->winwidth / 2) / 42 - cpy->x_offset
 				- data->width / 2 + 1) / 100;
@@ -89,4 +106,6 @@ void	ft_project(t_pt *pt, t_data *data)
 	pt->y += origin->y;
 	pt->x *= data->zoom;
 	pt->y *= data->zoom;
+	free(origin);
+	free(save);
 }
