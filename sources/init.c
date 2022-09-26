@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/24 15:44:16 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:20:22 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	ft_freedata(t_data *data)
 		i++;
 	}
 	free(data->matrix);
-	free(data->win);
+	mlx_destroy_image(data->mlx, data->img);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	free(data);
 	printf("boo\n");
@@ -32,7 +34,7 @@ void	ft_freedata(t_data *data)
 int	ft_close(void *data)
 {
 	ft_freedata(data);
-	(void)data;
+//	(void)data;
 	exit(0);
 }
 

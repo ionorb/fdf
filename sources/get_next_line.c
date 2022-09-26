@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:40:31 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/21 17:02:30 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:46:27 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,13 @@ char	*get_next_line(int fd)
 	}
 	if (!save || save[0] == 0)
 	{
+		printf("savesize:\n");
 	//	free(save);
 		return (NULL);
 	}
 	line = ft_makeline(save);
 	save = ft_cutcopy(line, save);
+	printf("savesize:%ld\n", ft_strlen(save));
 	return (line);
 }
 

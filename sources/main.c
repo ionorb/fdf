@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/21 16:48:21 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:20:07 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int	main(int ac, char **av)
 //	make_isometric(data);
 	setup_controls(data);
 	mlx_loop(data->mlx);
-	ft_freedata(data);
+//	ft_freedata(data);
 	return (0);
 }
