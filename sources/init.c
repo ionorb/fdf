@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/26 11:05:26 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:29:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_freedata(t_data *data)
 int	ft_close(void *data)
 {
 	ft_freedata(data);
-//	(void)data;
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:46:28 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/26 11:41:53 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:29:42 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	get_width(char	*filename)
 	free(line);
 	close(fd);
 	free(numbers);
-//	free(line);
 	return (i);
 }
 
