@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/26 14:32:35 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:31:13 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_struc_cmp(t_data *data, t_data *cpy)
 				- data->width / 2 + 1));
 	diff += ft_abs(cpy->y_offset - ((data->winheight / 2) / 42
 				- data->height / 2));
-	diff += ft_abs(cpy->ang_x - (-0.5)) * 5;
+	diff += ft_abs(cpy->ang_x - (-0.9)) * 5;
 	diff += ft_abs(cpy->ang_y - 0) * 5;
 	diff += ft_abs(cpy->ang_z - 0.8) * 5;
 	diff += ft_abs(cpy->zoom - 42) * 5;
@@ -70,14 +70,16 @@ void	make_isometric(t_data *data)
 	i = 0;
 	while (ft_struc_cmp(data, cpy) && i < 100)
 	{
-		data->x_offset += ((data->winwidth / 2) / 42 - cpy->x_offset
-				- data->width / 2 + 1) / 100;
-		data->y_offset += ((data->winheight / 2) / 42 - cpy->y_offset
-				- data->height / 2) / 100;
-		data->ang_x += angle_range(-0.5, cpy->ang_x);
+		data->x_offset += ((data->winwidth / 2) / (data->winwidth
+					/ (data->width * 1.5)) - (data->width / 2)
+				- cpy->x_offset) / 100;
+		data->y_offset += ((data->winheight / 2) / (data->winwidth
+					/ (data->width * 1.5)) - (data->height / 2)
+				- cpy->y_offset) / 100;
+		data->ang_x += angle_range(-0.9, cpy->ang_x);
 		data->ang_y += angle_range(0, cpy->ang_y);
 		data->ang_z += angle_range(0.8, cpy->ang_z);
-		data->zoom += (42 - cpy->zoom) / 100;
+		data->zoom += (data->winwidth / (data->width * 1.5) - cpy->zoom) / 100;
 		data->z_scale += (42 - cpy->z_scale) / 100;
 		draw(data);
 		i++;

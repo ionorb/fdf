@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:11:52 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/26 14:57:15 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:16:24 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_offset(int key, t_data *data)
 		data->x_offset += data->scaler * data->scaler / 2 * 0.1;
 	if (key >= 49 && key <= 57)
 		data->scaler = key - 48;
+	printf("y_off:%f, x_off:%f\n", data->y_offset, data->x_offset);
 }
 
 void	ft_angle(int key, t_data *data)
@@ -40,6 +41,7 @@ void	ft_angle(int key, t_data *data)
 		data->ang_z -= 0.1;
 	if (key == 101)
 		data->ang_z += 0.1;
+	printf("x:%f, y:%f, z:%f\n", data->ang_x, data->ang_y, data->ang_z);
 }
 
 void	ft_scale(int key, t_data *data)
@@ -50,6 +52,7 @@ void	ft_scale(int key, t_data *data)
 		data->z_scale -= 0.5;
 	if (key == 65307)
 		ft_close(data);
+	printf("z_scale:%f\n", data->z_scale);
 }
 
 void	ft_zoom(int key, t_data *data)
@@ -58,6 +61,8 @@ void	ft_zoom(int key, t_data *data)
 		data->zoom++;
 	if (key == 45)
 		data->zoom--;
+	printf("zoom:%f\n", data->zoom);
+	printf("width:%d, height:%d\n", data->width, data->height);
 }
 
 int	key_press(int key, t_data *data)

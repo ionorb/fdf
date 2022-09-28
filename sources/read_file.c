@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:46:28 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/28 14:47:06 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:53:51 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	read_file(char *filename, t_data *data)
 	{
 		line = get_next_line(fd, 1);
 		if (line)
-				fill_matrix(data->matrix[i], line);
+			fill_matrix(data->matrix[i], line);
 		free(line);
 		i++;
 	}
