@@ -6,11 +6,93 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:40:31 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/26 11:41:38 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:46:46 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*int	ft_hasnl(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_cutcopy(char *line, char *save)
+{
+	int		i;
+	char	*new;
+
+	i = 0;
+	while (save && save[i] != '\n' && save[i])
+	{
+		line[i] = save[i];
+		i++;
+	}
+	if (save[i] == '\n')
+	{
+		line[i] = save[i];
+		i++;
+	}
+	line[i] = '\0';
+	new = ft_strdup(save + i);
+	free(save);
+	return (new);
+}
+
+char	*ft_makeline(char *save, int *i)
+{
+	char	*new;
+	int		beg;
+
+	beg = *i;
+	printf("start:%d\n", *i);
+	while (save && save[*i] != '\n' && save[*i])
+		(*i)++;
+	if (save[*i] == '\n')
+		(*i)++;
+	new = (char *)malloc((*i + 1) * sizeof (char));
+	if (!new)
+		return (NULL);
+	ft_strlcpy(new, save + beg, *i + 1);
+	printf("start:%d\n", *i);
+	return (new);
+}
+
+char	*get_next_line(int fd, int *start)
+{
+	char			buf[BUFFER_SIZE + 1];
+	static char		*save;
+	char			*line;
+	int				i;
+
+	i = BUFFER_SIZE;
+	while (i == BUFFER_SIZE && !ft_hasnl(save))
+	{
+		i = read(fd, buf, BUFFER_SIZE);
+		if (i < 0)
+			return (NULL);
+		buf[i] = '\0';
+		save = ft_strjoin(save, buf);
+	}
+	if (i < BUFFER_SIZE && *start >= (int)ft_strlen(save) - 1)
+	{
+			free(save);
+			return (NULL);
+	}
+	line = ft_makeline(save, start);
+	printf("line:%s\n", line);
+	return (line);
+}*/
+
 
 int	ft_hasnl(char *str)
 {
@@ -64,9 +146,9 @@ char	*ft_makeline(char *save)
 	return (new);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int a)
 {
-	static char		buf[BUFFER_SIZE + 1];
+	char			buf[BUFFER_SIZE + 1];
 	static char		*save;
 	char			*line;
 	int				i;
@@ -80,14 +162,20 @@ char	*get_next_line(int fd)
 		buf[i] = '\0';
 		save = ft_strjoin(save, buf);
 	}
-	if (!save || save[0] == 0)
-		return (NULL);
+	if (!save || (i < BUFFER_SIZE && !save[0]))
+	{
+			if (a)
+				free(save);
+			return (NULL);
+	}
 	line = ft_makeline(save);
 	save = ft_cutcopy(line, save);
 	return (line);
 }
+/*
+-----------------------------------------------------------------------
 
-/*static char	*function_name(int fd, char *buf, char *backup)
+static char	*function_name(int fd, char *buf, char *backup)
 {
 	int		read_line;
 	char	*char_temp;

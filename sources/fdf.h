@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/26 14:47:34 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:45:53 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_pt
 	int		color;
 }	t_pt;
 
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int a);
 void	read_file(char *filename, t_data *data);
 int		ft_hasnl(char	*str);
 void	draw(t_data *data);

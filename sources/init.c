@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/26 15:17:03 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:47:31 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_freedata(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i <= data->height)
+	while (i < data->height)
 	{
 		free(data->matrix[i]);
 		i++;
@@ -58,8 +58,8 @@ t_data	*ft_init_data(char **av)
 	data->scaler = 1;
 	data->maxz = maxz(data);
 	data->minz = minz(data);
-	data->winwidth = ft_atoi(av[2]);
-	data->winheight = ft_atoi(av[3]);
+	data->winwidth = 1800;
+	data->winheight = 1200;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->winwidth, data->winheight,
 			"howcanibehomophobic");

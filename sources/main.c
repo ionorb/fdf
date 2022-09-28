@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/26 14:01:13 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:06:31 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 	time_t begin, end;
 
 	time(&begin);
-	if (ac != 4)
+	if (ac != 2)
 		return (0);
 	data = ft_init_data(av);
 	setup_controls(data);

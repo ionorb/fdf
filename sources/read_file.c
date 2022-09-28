@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:46:28 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/26 15:19:56 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:47:06 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	get_height(char	*filename, t_data *data)
 		exit(0);
 	}
 	i = 0;
-	line = get_next_line(fd);
-	while (line)
+	line = get_next_line(fd, 0);
+	while (line && line[0])
 	{
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 		i++;
 	}
 	free(line);
@@ -45,7 +45,7 @@ int	get_width(char	*filename)
 	char	**numbers;
 
 	fd = open(filename, O_RDONLY, 0);
-	line = get_next_line(fd);
+	line = get_next_line(fd, 0);
 	numbers = ft_split(line, " \n");
 	free(line);
 	i = 0;
@@ -54,11 +54,11 @@ int	get_width(char	*filename)
 		free(numbers[i]);
 		i++;
 	}
-	line = get_next_line(fd);
-	while (line)
+	line = get_next_line(fd, 0);
+	while (line && line[0])
 	{
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 	}
 	free(line);
 	close(fd);
@@ -96,16 +96,13 @@ void	read_file(char *filename, t_data *data)
 		data->matrix[i] = malloc((data->width + 1) * sizeof (int));
 	fd = open(filename, O_RDONLY, 0);
 	i = 0;
-	while (i < data->height)
+	while (i <= data->height)
 	{
-		line = get_next_line(fd);
-		fill_matrix(data->matrix[i], line);
+		line = get_next_line(fd, 1);
+		if (line)
+				fill_matrix(data->matrix[i], line);
 		free(line);
 		i++;
 	}
-	line = get_next_line(fd);
-	line = get_next_line(fd);
-	free(line);
-	data->matrix[i] = NULL;
 	close(fd);
 }
