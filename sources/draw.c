@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/28 13:13:59 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:05:37 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data)
 	if (current->x > 0 && current->x < data->size_line / 4 && current->y > 0
 		&& current->y < data->winheight)
 	{
-		i = (((int)(current->x) * (int)(data->bits_per_pixel / 8))
+		i = (((int)(current->x) * (data->bits_per_pixel / 8))
 				+ ((int)(current->y) * (int)(data->size_line)));
 		color = get_color(from, to, current);
 		data->addr[i] = color;

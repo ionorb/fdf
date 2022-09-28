@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/28 16:28:56 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/09/29 00:08:02 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ typedef struct s_data
 	int		winwidth;
 	float	maxz;
 	float	minz;
+	int		centrex;
+	int		centrey;
+	int		mousex;
+	int		mousey;
+	int		prev_mousex;
+	int		prev_mousey;
 }	t_data;
 
 typedef struct s_pt
