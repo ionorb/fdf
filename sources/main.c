@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/29 01:03:04 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/08 19:51:14 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@ int	mouse_press(int button, int x, int y, t_data *data)
 	{
 			data->x_offset -= (data->mousex - data->prev_mousex) / data->zoom;
 			data->y_offset -= (data->mousey - data->prev_mousey) / data->zoom;
-			data->zoom++;
+			if (data->zoom < 1500)
+					data->zoom *= 1.1;
 	}
 	if (button == 5)
 	{
 			data->x_offset -= (data->mousex - data->prev_mousex) / data->zoom;
 			data->y_offset -= (data->mousey - data->prev_mousey) / data->zoom;
-			data->zoom--;
+			printf("[%f]\n", data->x_offset);
+			data->zoom /= 1.1;
 	}
+	ft_putnbr_fd(1, (int)data->zoom);
+	write(1, "\n", 1);
+	printf("zoom:%f\n", data->zoom);
 	draw(data);
 	data->prev_mousex = x;
 	data->prev_mousey = y;

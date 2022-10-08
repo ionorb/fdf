@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/09/29 00:08:02 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/08 21:37:18 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define PINK 0xFF00FF
 # define YELLOW 0xFFFF00
 # define ORANGE 0xFFA500
+# define PI 3.141
 
 /*int	make_color(float percent, int start, int end)
 {
@@ -72,6 +73,7 @@ typedef struct s_data
 	int		mousey;
 	int		prev_mousex;
 	int		prev_mousey;
+	int		factor;
 }	t_data;
 
 typedef struct s_pt

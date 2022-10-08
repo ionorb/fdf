@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/09/28 22:05:37 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/08 21:50:08 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,68 @@ void	make_grid(t_pt *from, t_pt *to, t_data *data)
 	}
 }
 
+void	make_grid_rev(t_pt *from, t_pt *to, t_data *data)
+{
+	int		y;
+	int		x;
+
+	y = data->height - 1;
+	while (y >= 0)
+	{
+		x = data->width - 1;
+		while (x >= 0)
+		{
+			if (x > 0)
+			{
+				make_pt(x, y, from, data);
+				make_pt(x - 1, y, to, data);
+				draw_line_v2(from, to, data);
+			}
+			if (y > 0)
+			{
+				make_pt(x, y, from, data);
+				make_pt(x, y - 1, to, data);
+				draw_line_v2(from, to, data);
+			}
+			x--;
+		}
+		y--;
+	}
+}
+
+int		get_inversion(t_data *data)
+{
+		int	invert;
+
+		invert = 1;
+		if (data->ang_z > 1/2 * PI && data->ang_z < 3/2 * PI)
+				invert = -1;
+		if (data->ang_y > 1/2 * PI && data->ang_y < 3/2 * PI)
+				invert = -1;
+		if (data->ang_x > 1/2 * PI && data->ang_x < 3/2 * PI)
+				invert = -1;
+		return (invert);
+}
+
 void	draw(t_data *data)
 {
 	t_pt	*from;
 	t_pt	*to;
+	int		invert;
 
 	from = malloc(sizeof (t_pt));
 	to = malloc(sizeof (t_pt));
 	mlx_destroy_image(data->mlx, data->img);
+	//write(1, "before\n", 7);
 	data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
+	//write(1, "after\n", 6);
 	data->addr = mlx_get_data_addr(data->img,
 			&(data->bits_per_pixel), &(data->size_line), &(data->endian));
-	make_grid(from, to, data);
+	invert = get_inversion(data);
+	if (invert == -1)
+		make_grid_rev(from, to, data);
+	else
+		make_grid(from, to, data);
 	free(from);
 	free(to);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
