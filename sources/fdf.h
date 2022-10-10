@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/10/10 18:26:03 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:48:29 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ typedef struct s_pt
 	int		color;
 }	t_pt;
 
+//general
 char	*get_next_line(int fd, int a);
 void	read_file(char *filename, t_data *data);
 int		ft_hasnl(char	*str);
 void	draw(t_data *data);
-void	draw_line_v2(t_pt *from, t_pt *to, t_data *data);
 void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data);
 
 //init

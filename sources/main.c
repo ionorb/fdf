@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:26 by myaccount         #+#    #+#             */
-/*   Updated: 2022/10/10 15:54:03 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:35:12 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 int	mouse_press(int button, int x, int y, t_data *data)
 {
-	data->mousex = x;
-	data->mousey = y;
+	if (button == 4 || button == 5)
+	{
+		data->mousex = x;
+		data->mousey = y;
+	}
 	if (button == 4)
 	{
 		data->x_offset -= (data->mousex - data->prev_mousex) / data->zoom;
 		data->y_offset -= (data->mousey - data->prev_mousey) / data->zoom;
-		if (data->zoom < 1500)
-				data->zoom *= 1.1;
+		data->zoom *= 1.1;
 	}
 	if (button == 5)
 	{
@@ -29,12 +31,12 @@ int	mouse_press(int button, int x, int y, t_data *data)
 		data->y_offset -= (data->mousey - data->prev_mousey) / data->zoom;
 		data->zoom /= 1.1;
 	}
-	ft_putnbr_fd(1, (int)data->zoom);
-	write(1, "\n", 1);
-	printf("zoom:%f\n", data->zoom);
 	draw(data);
-	data->prev_mousex = x;
-	data->prev_mousey = y;
+	if (button == 4 || button == 5)
+	{
+		data->prev_mousex = x;
+		data->prev_mousey = y;
+	}
 	return (0);
 }
 

@@ -6,11 +6,21 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:56:02 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/10 19:15:01 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:53:19 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	make_pt(float x, float y, t_pt *pt, t_data *data)
+{
+	pt->z = data->matrix[(int)y][(int)x];
+	pt->x = x;
+	pt->y = y;
+	pt->color = get_default_color(pt->z, data);
+	pt->z -= ((pt->z / 10) * data->z_scale) / 5;
+	ft_project(pt, data);
+}
 
 void	make_grid(t_pt *from, t_pt *to, t_data *data)
 {
@@ -56,13 +66,13 @@ void	make_grid_rev(t_pt *from, t_pt *to, t_data *data)
 			{
 				make_pt(x, y, from, data);
 				make_pt(x - 1, y, to, data);
-				draw_line_v2(from, to, data);
+				draw_line(from, to, data);
 			}
 			if (y > 0)
 			{
 				make_pt(x, y, from, data);
 				make_pt(x, y - 1, to, data);
-				draw_line_v2(from, to, data);
+				draw_line(from, to, data);
 			}
 			x--;
 		}

@@ -6,7 +6,7 @@ MLX_LINUX		=	$(MLX_LINUX_PATH)/libmlx.a
 
 SOURCES_FILES		=	draw.c main.c read_file.c get_next_line.c \
 				key_press.c project.c init.c utils.c color.c \
-				rotate.c draw_line.c grid.c
+				rotate.c grid.c
 
 SOURCES_DIR		=	sources
 
@@ -15,6 +15,8 @@ HEADER			=	$(SOURCES_DIR)/fdf.h
 SOURCES			=	$(addprefix $(SOURCES_DIR)/, $(SOURCES_FILES))
 
 OBJECTS			= 	$(SOURCES:.c=.o)
+
+MAKE			=	make
 
 NAME			=	fdf
 
