@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:56:02 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/10 15:59:09 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:15:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	make_grid(t_pt *from, t_pt *to, t_data *data)
 			{
 				make_pt(x, y, from, data);
 				make_pt(x + 1, y, to, data);
-				draw_line_v2(from, to, data);
+				draw_line(from, to, data);
 			}
 			if (y < data->height - 1)
 			{
 				make_pt(x, y, from, data);
 				make_pt(x, y + 1, to, data);
-				draw_line_v2(from, to, data);
+				draw_line(from, to, data);
 			}
 			x++;
 		}
@@ -75,7 +75,7 @@ int	get_inversion(t_data *data)
 	int	invert;
 
 	invert = 1;
-	if (data->ang_z > 1.7 && data->ang_z < 3 * PI / 2)
+	if (data->ang_z > PI / 2 && data->ang_z < 3 * PI / 2)
 			invert *= -1;
 	if (data->ang_x > 0 && data->ang_x < PI)
 			invert *= -1;

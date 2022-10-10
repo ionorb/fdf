@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/10 15:52:29 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:20:44 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	init_pos(t_data *data)
 	data->centrey = data->winheight / 2;
 	data->prev_mousex = 0;
 	data->prev_mousey = 0;
-	data->factor = 1;
+	data->mousex = 0;
+	data->mousey = 0;
 }
 
 t_data	*ft_init_data(char **av)

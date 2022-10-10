@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:05:36 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/28 13:25:41 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:23:10 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ float	ft_percentage(int start, int end, int current)
 	float	distance;
 
 	current_loc = current - start;
-	distance = end - start;
+	distance = (float)(end - start);
 	if (distance == 0)
 		return (1);
 	return (current_loc / distance);

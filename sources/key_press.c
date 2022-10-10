@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:11:52 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/10 16:00:27 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:21:28 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ float	ft_normalize(float ang)
 void	ft_angle(int key, t_data *data)
 {
 	if (key == 119)
-		data->ang_x -= 0.1 * data->factor;
+		data->ang_x -= 0.1;
 	if (key == 115)
-		data->ang_x += 0.1 * data->factor;
+		data->ang_x += 0.1;
 	data->ang_x = ft_normalize(data->ang_x);
-	if (key == 97)
-		data->ang_y -= 0.1 * data->factor;
-	if (key == 100)
-		data->ang_y += 0.1 * data->factor;
+//	if (key == 97)
+//		data->ang_y -= 0.1;
+//	if (key == 100)
+//		data->ang_y += 0.1;
 	data->ang_y = ft_normalize(data->ang_y);
 	if (key == 113)
-		data->ang_z -= 0.1 * data->factor;
+		data->ang_z -= 0.1;
 	if (key == 101)
-		data->ang_z += 0.1 * data->factor;
+		data->ang_z += 0.1;
 	data->ang_z = ft_normalize(data->ang_z);
 	printf("x: %f, y: %f, z: %f\n", data->ang_x, data->ang_y, data->ang_z);
 }

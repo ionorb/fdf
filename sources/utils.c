@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:41:50 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/26 12:31:21 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:55:34 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ float	ft_abs(float n)
 {
 	float	num;
 
-	num = (float)n;
+	num = n;
 	if (num < 0)
 		return (num *= -1);
 	return (num);

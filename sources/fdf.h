@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/10/10 15:57:08 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:26:03 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_data
 	int		mousey;
 	int		prev_mousex;
 	int		prev_mousey;
-	int		factor;
 }	t_data;
 
 typedef struct s_pt
@@ -127,4 +126,5 @@ int		get_default_color(int z, t_data *data);
 void	make_grid(t_pt *from, t_pt *to, t_data *data);
 void	make_grid_rev(t_pt *from, t_pt *to, t_data *data);
 int		get_inversion(t_data *data);
+void	draw_line(t_pt *from, t_pt *to, t_data *data);
 #endif

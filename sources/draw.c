@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/10/10 15:59:17 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:22:58 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	draw(t_data *data)
 	data->addr = mlx_get_data_addr(data->img,
 			&(data->bits_per_pixel), &(data->size_line), &(data->endian));
 	invert = get_inversion(data);
-	printf("invert:%d\n", invert);
 	if (invert == 1)
 		make_grid(from, to, data);
 	else
