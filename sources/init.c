@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/08 21:20:07 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:52:29 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	init_pos(t_data *data)
 	data->z_scale = 42;
 	data->centrex = data->winwidth / 2;
 	data->centrey = data->winheight / 2;
-	data->prev_mousex = 0;//data->centrex;
-	data->prev_mousey = 0;//data->centrey;
+	data->prev_mousex = 0;
+	data->prev_mousey = 0;
 	data->factor = 1;
 }
 

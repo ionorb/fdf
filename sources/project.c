@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/09/29 01:11:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:57:55 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	ft_project(t_pt *pt, t_data *data)
 	rotate_x(pt, save, data);
 	pt->x += origin->x;
 	pt->y += origin->y;
-	pt->x = pt->x * data->zoom + data->mousex; 
+	pt->x = pt->x * data->zoom + data->mousex;
 	pt->y = pt->y * data->zoom + data->mousey;
 	free(origin);
 	free(save);

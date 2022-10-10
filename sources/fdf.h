@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/10/08 21:37:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:57:08 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,9 @@ int		key_press(int key, t_data *data);
 float	percentage(int start, int end, int current);
 int		get_color(t_pt *from, t_pt *to, t_pt *current);
 int		get_default_color(int z, t_data *data);
+
+//grid
+void	make_grid(t_pt *from, t_pt *to, t_data *data);
+void	make_grid_rev(t_pt *from, t_pt *to, t_data *data);
+int		get_inversion(t_data *data);
 #endif

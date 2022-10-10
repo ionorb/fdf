@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:11:52 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/08 21:30:18 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:00:27 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void	ft_angle(int key, t_data *data)
 
 void	ft_scale(int key, t_data *data)
 {
+	if (key == 61)
+		data->zoom++;
+	if (key == 45)
+		data->zoom--;
 	if (key == 44)
 		data->z_scale += 0.5;
 	if (key == 46)
@@ -72,20 +76,11 @@ void	ft_scale(int key, t_data *data)
 		ft_close(data);
 }
 
-void	ft_zoom(int key, t_data *data)
-{
-	if (key == 61)
-		data->zoom++;
-	if (key == 45)
-		data->zoom--;
-}
-
 int	key_press(int key, t_data *data)
 {
 	ft_offset(key, data);
 	ft_angle(key, data);
 	ft_scale(key, data);
-	ft_zoom(key, data);
 	if (key == 105)
 		make_isometric(data);
 	draw(data);
