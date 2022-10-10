@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/10/10 21:48:29 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:51:01 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int		get_color(t_pt *from, t_pt *to, t_pt *current);
 int		get_default_color(int z, t_data *data);
 
 //grid
-void	make_grid(t_pt *from, t_pt *to, t_data *data);
-void	make_grid_rev(t_pt *from, t_pt *to, t_data *data);
+int		make_grid(t_pt *from, t_pt *to, t_data *data);
+int		make_grid_rev(t_pt *from, t_pt *to, t_data *data);
 int		get_inversion(t_data *data);
-void	draw_line(t_pt *from, t_pt *to, t_data *data);
+int		draw_line(t_pt *from, t_pt *to, t_data *data);
 #endif

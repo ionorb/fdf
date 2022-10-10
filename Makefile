@@ -31,8 +31,8 @@ MLX_LINUX_FLAGS		=	-L. -lXext -L. -lX11 -lm -lbsd
 
 all:			$(NAME)
 
-$(NAME):		$(LIBFT) $(MLX_LINUX) $(OBJECTS) $(HEADER)
-				$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLX_LINUX) $(MLX_LINUX_FLAGS) -o $(NAME)
+$(NAME):		$(LIBFT) $(MLX_LINUX) $(OBJECTS)
+				$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(HEADER) $(MLX_LINUX) $(MLX_LINUX_FLAGS) -o $(NAME)
 
 $(LIBFT):
 			$(MAKE) -C $(LIBFT_PATH)
