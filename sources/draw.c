@@ -6,7 +6,7 @@
 /*   By: yoel <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:22:45 by yoel              #+#    #+#             */
-/*   Updated: 2022/10/11 00:43:39 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:25:50 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data)
 	}
 }
 
-int	draw_line(t_pt *from, t_pt *to, t_data *data)
+void	draw_line(t_pt *from, t_pt *to, t_data *data)
 {
 	float	dx;
 	float	dy;
@@ -38,8 +38,6 @@ int	draw_line(t_pt *from, t_pt *to, t_data *data)
 	int		i;
 
 	current = malloc(sizeof (t_pt));
-	if (!current)
-		return (0);
 	dx = (to->x - from->x);
 	dy = (to->y - from->y);
 	if (ft_abs(dx) >= ft_abs(dy))
@@ -50,17 +48,14 @@ int	draw_line(t_pt *from, t_pt *to, t_data *data)
 	dy = dy / step;
 	current->x = from->x;
 	current->y = from->y;
-	i = 0;
-	while (i < step)
+	i = -1;
+	while (++i < step)
 	{
 		ft_put_pixel(from, to, current, data);
 		current->x = current->x + dx;
 		current->y = current->y + dy;
-		i++;
 	}
-	i++;
 	free(current);
-	return (i);
 }
 
 void	draw(t_data *data)
@@ -68,29 +63,19 @@ void	draw(t_data *data)
 	t_pt	*from;
 	t_pt	*to;
 	int		invert;
-	int		i;
 
 	from = malloc(sizeof (t_pt));
-	if (!from)
-		ft_close(data);
 	to = malloc(sizeof (t_pt));
-	if (!to)
-	{
-		free(from);
-		ft_close(data);
-	}
 	mlx_destroy_image(data->mlx, data->img);
 	data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
 	data->addr = mlx_get_data_addr(data->img,
 			&(data->bits_per_pixel), &(data->size_line), &(data->endian));
 	invert = get_inversion(data);
 	if (invert == 1)
-		i = make_grid(from, to, data);
+		make_grid(from, to, data);
 	else
-		i = make_grid_rev(from, to, data);
+		make_grid_rev(from, to, data);
 	free(from);
 	free(to);
-	if (!i)
-		ft_close(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }

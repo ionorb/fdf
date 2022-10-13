@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:11:00 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/10 19:20:44 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:48:35 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,18 @@ void	ft_freedata(t_data *data)
 	free(data->mlx);
 }
 
+void	ft_exit(char *msg)
+{
+	ft_putstr_fd(msg, 1);
+	exit(0);
+}
+
 int	ft_close(void *data)
 {
 	ft_freedata(data);
 	free(data);
-	exit(0);
+	ft_exit("program exited correctly :)");
+	return (0);
 }
 
 void	init_pos(t_data *data)
@@ -60,6 +67,8 @@ t_data	*ft_init_data(char **av)
 	t_data	*data;
 
 	data = malloc(sizeof (t_data));
+	if (!data)
+		ft_exit("problem with malloc of: 'data' variable");
 	read_file(av[1], data);
 	data->winwidth = 1200;
 	data->winheight = 1200;
@@ -68,8 +77,8 @@ t_data	*ft_init_data(char **av)
 	data->maxz = maxz(data);
 	data->minz = minz(data);
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, data->winwidth, data->winheight,
-			"howcanibehomophobic");
+	data->win = mlx_new_window(data->mlx, data->winwidth, \
+			data->winheight, "fdf");
 	data->img = mlx_new_image(data->mlx, data->winwidth, data->winheight);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
 			&(data->size_line), &(data->endian));

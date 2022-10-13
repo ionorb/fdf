@@ -6,7 +6,7 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:11:52 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/10 21:34:42 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/12 16:50:37 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	key_press(int key, t_data *data)
 	ft_angle(key, data);
 	ft_scale(key, data);
 	if (key == 105)
-		make_isometric(data);
+		init_pos(data);
 	draw(data);
 	return (0);
 }

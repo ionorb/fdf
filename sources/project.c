@@ -6,13 +6,60 @@
 /*   By: yridgway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 00:08:29 by yridgway          #+#    #+#             */
-/*   Updated: 2022/10/10 19:22:34 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:26:13 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_data	*cpy_struc(t_data *data)
+void	rotate_x(t_pt *pt, t_pt *save, t_data *data)
+{
+	save->y = pt->y;
+	save->z = pt->z;
+	pt->y = save->y * cos(data->ang_x) + save->z * sin(data->ang_x);
+	pt->z = -save->y * sin(data->ang_x) + save->z * cos(data->ang_x);
+}
+
+void	rotate_y(t_pt *pt, t_pt *save, t_data *data)
+{
+	save->x = pt->x;
+	pt->z = save->z * cos(data->ang_y) - save->x * sin(data->ang_y);
+	pt->x = save->z * sin(data->ang_y) + save->x * cos(data->ang_y);
+}
+
+void	rotate_z(t_pt *pt, t_pt *save, t_data *data)
+{
+	pt->x = save->x * cos(data->ang_z) - save->y * sin(data->ang_z);
+	pt->y = save->x * sin(data->ang_z) + save->y * cos(data->ang_z);
+}
+
+void	ft_project(t_pt *pt, t_data *data)
+{
+	t_pt	*save;
+	t_pt	*origin;
+
+	origin = malloc(sizeof (t_pt));
+	save = malloc(sizeof (t_pt));
+	origin->x = data->width / 2 + data->x_offset;
+	origin->y = data->height / 2 + data->y_offset;
+	origin->z = 0;
+	pt->x += data->x_offset;
+	pt->y += data->y_offset;
+	save->x = pt->x - origin->x;
+	save->y = pt->y - origin->y;
+	save->z = pt->z;
+	rotate_z(pt, save, data);
+	rotate_y(pt, save, data);
+	rotate_x(pt, save, data);
+	pt->x += origin->x;
+	pt->y += origin->y;
+	pt->x = pt->x * data->zoom + data->mousex;
+	pt->y = pt->y * data->zoom + data->mousey;
+	free(origin);
+	free(save);
+}
+
+/*t_data	*cpy_struc(t_data *data)
 {
 	t_data	*cpy;
 
@@ -86,29 +133,4 @@ void	make_isometric(t_data *data)
 	}
 	free(cpy);
 }
-
-void	ft_project(t_pt *pt, t_data *data)
-{
-	t_pt	*save;
-	t_pt	*origin;
-
-	origin = malloc(sizeof (t_pt));
-	save = malloc(sizeof (t_pt));
-	origin->x = data->width / 2 + data->x_offset;
-	origin->y = data->height / 2 + data->y_offset;
-	origin->z = 0;
-	pt->x += data->x_offset;
-	pt->y += data->y_offset;
-	save->x = pt->x - origin->x;
-	save->y = pt->y - origin->y;
-	save->z = pt->z;
-	rotate_z(pt, save, data);
-	rotate_y(pt, save, data);
-	rotate_x(pt, save, data);
-	pt->x += origin->x;
-	pt->y += origin->y;
-	pt->x = pt->x * data->zoom + data->mousex;
-	pt->y = pt->y * data->zoom + data->mousey;
-	free(origin);
-	free(save);
-}
+*/

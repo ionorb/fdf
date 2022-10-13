@@ -6,7 +6,7 @@
 /*   By: myaccount <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 00:40:42 by myaccount         #+#    #+#             */
-/*   Updated: 2022/10/10 23:51:01 by yridgway         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:27:19 by yridgway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ void	ft_put_pixel(t_pt *from, t_pt *to, t_pt *current, t_data *data);
 //init
 t_data	*ft_init_data(char **av);
 int		ft_close(void *data);
+void	ft_exit(char *msg);
 void	ft_freedata(t_data *data);
+void	init_pos(t_data *data);
 
 //keypress
 void	ft_offset(int key, t_data *data);
@@ -104,10 +106,6 @@ void	ft_zoom(int key, t_data *data);
 //3d
 void	ft_project(t_pt *pt, t_data *data);
 void	make_pt(float x, float y, t_pt *pt, t_data *data);
-void	make_isometric(t_data *data);
-void	rotate_x(t_pt *pt, t_pt *save, t_data *data);
-void	rotate_y(t_pt *pt, t_pt *save, t_data *data);
-void	rotate_z(t_pt *pt, t_pt *save, t_data *data);
 
 //utils
 float	ft_abs(float n);
@@ -123,8 +121,8 @@ int		get_color(t_pt *from, t_pt *to, t_pt *current);
 int		get_default_color(int z, t_data *data);
 
 //grid
-int		make_grid(t_pt *from, t_pt *to, t_data *data);
-int		make_grid_rev(t_pt *from, t_pt *to, t_data *data);
+void	make_grid(t_pt *from, t_pt *to, t_data *data);
+void	make_grid_rev(t_pt *from, t_pt *to, t_data *data);
 int		get_inversion(t_data *data);
-int		draw_line(t_pt *from, t_pt *to, t_data *data);
+void	draw_line(t_pt *from, t_pt *to, t_data *data);
 #endif
